@@ -1,0 +1,102 @@
+@function px2rem($pixels, $context: 108) {
+  @return ($pixels / $context) * 1rem;
+}
+
+.content {
+  background-color: #F5F5F5;
+
+  .row-control {
+    background-color: #fff;
+    margin-bottom: 0.2657rem;
+  }
+
+  // 默认三个就近地址
+  .address-choice {
+    padding: px2rem(60) px2rem(36);
+
+    .icon-checked {
+      visibility: hidden;
+      right: px2rem(36);
+      background: url('/assets/global/images/icon-selected.png?__inline');
+      width: px2rem(58);
+      height: px2rem(42);
+      top: 40%;
+      background-size: px2rem(58) px2rem(42);
+    }
+
+    &.selected {
+      .icon-checked {
+        visibility: visible;
+      }
+    }
+
+    .icon-location {
+      left: 0;
+      background: url('/assets/global/images/icon-location.svg?__inline');
+      width: px2rem(40);
+      height: px2rem(44);
+      background-size: px2rem(44) px2rem(44);
+    }
+
+    .site-name,
+    .address-detail {
+      position: relative;
+      line-height: 1.4;
+    }
+
+    .site-name {
+      margin-bottom: px2rem(30);
+    }
+
+    .address-detail {
+      font-size: 14px;
+      padding-left: px2rem(50);
+
+      span{
+        opacity: .5;
+      }
+    }
+  }
+}
+
+// 预约时间段弹层样式
+.order-time-template {
+  .row-control {
+    .row-wrapper {
+      border-bottom: 1px solid rgba(0,0,0, .05);
+    }
+
+    .title {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: px2rem(218);
+      text-align: center;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .date {
+      opacity: .5;
+    }
+
+    .label-control {
+      margin-left: px2rem(218);
+
+      .tips {
+        float: right;
+        margin-right: px2rem(36);
+      }
+    }
+
+    .order-full {
+      opacity: .5;
+    }
+  }
+
+  .row-control:first-child {
+    .row-wrapper {
+      border-top: 1px solid rgba(0,0,0, .05);
+    }
+  }
+}

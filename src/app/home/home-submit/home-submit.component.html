@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="content">
+    <form class="form">
+      <div class="row-control">
+        <div class="input-control">
+          <input type="text" name="sn" placeholder="手机 SN 码">
+          <i class="icon icon-delete"></i>
+        </div>
+        <div class="input-control">
+          <input type="text" name="vcode" placeholder="V 码">
+          <i class="icon icon-delete"></i>
+        </div>
+      </div>
+      <div class="row-control">
+        <div class="label-control select-control service-type" data-target="serviceType">
+          <i class="icon icon-arrow"></i>
+          <label class="label label-title" role="service-type">服务类型</label>
+          <label class="label result"></label>
+          <!-- 服务类型 S -->
+          <script type="text/template" id="serviceType">
+            <div class="row-control service-list" single-select>
+              {{each data}}
+              <div class="label-control" data-code="{{$index}}">
+                <label class="label">{{$value}}</label>
+              </div>
+              {{/each}}
+            </div>
+          </script>
+          <!-- 服务类型 E -->
+        </div>
+        <div class="label-control select-control fault" data-target="fault">
+          <i class="icon icon-arrow"></i>
+          <label class="label label-title">故障类型</label>
+          <label class="label result"></label>
+          <!-- 故障类型 S -->
+          <script type="text/template" id="fault">
+            <div class="row-control fault-list" multi-select>
+              {{each data}}
+              <div class="label-control"><label class="label">{{$value}}</label></div>
+              {{/each}}
+              <div class="input-control">
+                <input type="text" name="fault-remark" placeholder="输入其它原因">
+              </div>
+            </div>
+          </script>
+          <!-- 故障类型 E -->
+        </div>
+      </div>
+      <div class="row-control">
+        <div class="label-control select-control send-address" data-target="send-address">
+          <i class="icon icon-arrow"></i>
+          <label class="label label-title">取件地址</label>
+          <label class="label result"></label>
+        </div>
+        <div class="label-control protocol">
+          <i class="icon icon-radio"></i>
+          <div class="label">我已阅读以下并同意对寄修可能产生的费用进行支付。<br><a href="http://mcare.meizu.com/policy.html">《魅族手机售后服务政策》</a>及<a href="http://mcare.meizu.com/price-list.html">《保外服务报价清单》</a>
+          </div>
+        </div>
+        <div class="btn-control">
+          <a class="button submit cancel" href="javascript:;">确认申请</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

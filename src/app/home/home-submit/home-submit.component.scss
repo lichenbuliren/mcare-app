@@ -1,0 +1,69 @@
+@function px2rem($pixels, $context: 108) {
+  @return ($pixels / $context) * 1rem;
+}
+
+@mixin font-dpr($font-size){
+  font-size: $font-size;
+
+  [data-dpr="2"] & {
+    font-size: $font-size * 2;
+  }
+
+  [data-dpr="3"] & {
+    font-size: $font-size * 3;
+  }
+}
+
+.content{
+  padding: 0;
+  background-color: #F5F5F5;
+  .row-control{
+    background-color: #fff;
+    margin-bottom: px2rem(33);
+
+    .input-control:last-child,
+    .label-control:last-child{
+      border-bottom: 0;
+    }
+    &:last-child{
+      margin-bottom: 0;
+    }
+
+    // 注释
+    .remark{
+      opacity: .5;
+      padding: px2rem(30) 0;
+      padding-left: px2rem(36);
+      font-size: 12px;
+    }
+
+    // 阅读协议
+    .protocol{
+      padding-left: px2rem(140);
+      text-indent: 0;
+      border-bottom: 0;
+      @include font-dpr(12px);
+
+      .label{
+        text-align: left;
+        padding-left: 0;
+        line-height: 1.4;
+      }
+
+      a{
+        color: #18BD91;
+      }
+
+      .icon{
+        left: px2rem(30);
+        top: px2rem(62);
+        transform: none;
+      }
+    }
+  }
+  // 按钮
+  .btn-control{
+    margin-top: px2rem(30);
+    padding-bottom: px2rem(187);
+  }
+}

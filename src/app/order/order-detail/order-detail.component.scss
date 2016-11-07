@@ -1,0 +1,35 @@
+@function px2rem($pixels, $context: 108) {
+  @return ($pixels / $context) * 1rem;
+}
+
+.container {
+  .content {
+    background-color: #F5F5F5;
+  }
+
+  .row-control {
+    background-color: #fff;
+    margin-bottom: 0.2657rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .btn-control {
+    overflow: hidden;
+
+    .button {
+      width: px2rem(396);
+
+      &:nth-child(1) {
+        float: left;
+      }
+
+      &:nth-child(2) {
+        float: right;
+      }
+    }
+  }
+}
+

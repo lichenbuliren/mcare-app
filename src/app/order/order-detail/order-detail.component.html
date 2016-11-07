@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="content">
+    <form class="form">
+      <div class="row-control">
+        <div class="label-control select-control" data-target="serviceType">
+          <i class="icon icon-arrow"></i>
+          <label class="label label-title" role="service-type">服务类型</label>
+          <label class="label result"></label>
+          <!-- 服务类型 S -->
+          <script type="text/template" id="serviceType">
+            <div class="row-control service-list" single-select>
+              {{each data}}
+              <div class="label-control {{if $index == 1}}selected{{/if}}" data-code="{{$index}}">
+                <label class="label">{{$value}}</label>
+              </div>
+              {{/each}}
+            </div>
+          </script>
+          <!-- 服务类型 E -->
+        </div>
+        <div class="label-control select-control" data-target="fault">
+          <i class="icon icon-arrow"></i>
+          <label class="label label-title">故障类型</label>
+          <label class="label result"></label>
+          <!-- 故障类型 S -->
+          <script type="text/template" id="fault">
+            <div class="row-control fault-list" multi-select>
+              {{each data}}
+              <div class="label-control"><label class="label">{{$value}}</label></div>
+              {{/each}}
+              <div class="input-control">
+                <input type="text" name="fault-remark" placeholder="输入其它原因">
+              </div>
+            </div>
+          </script>
+          <!-- 故障类型 E -->
+        </div>
+      </div>
+      <div class="row-control">
+        <div class="label-control select-control" data-target="phoneType">
+          <i class="icon icon-arrow"></i>
+          <label class="label label-title">选择机型</label>
+          <label class="label result"></label>
+          <script type="text/template" id="phoneType">
+            <div class="row-control" single-select>
+              {{each data}}
+              <div class="label-control {{if $index === 0}}selected{{/if}}" data-index={{$index}}><label class="label">{{$value.model}}</label></div>
+              {{/each}}
+            </div>
+          </script>
+        </div>
+        <div class="label-control select-control" data-target="capacity">
+          <i class="icon icon-arrow"></i>
+          <label class="label label-title">选择容量</label>
+          <label class="label result"></label>
+          <script type="text/template" id="capacity">
+            <div class="row-control" single-select>
+              {{each data}}
+              <div class="label-control {{if $index === 0}}selected{{/if}}"><label class="label">{{$value}}</label></div>
+              {{/each}}
+            </div>
+          </script>
+        </div>
+        <div class="label-control select-control" data-target="networkType">
+          <i class="icon icon-arrow"></i>
+          <label class="label label-title">网络类型</label>
+          <label class="label result"></label>
+          <script type="text/template" id="networkType">
+            <div class="row-control" single-select>
+              {{each data}}
+              <div class="label-control {{if $index === 0}}selected{{/if}}"><label class="label">{{$value}}</label></div>
+              {{/each}}
+            </div>
+          </script>
+        </div>
+        <div class="label-control select-control" data-target="phoneColor">
+          <i class="icon icon-arrow"></i>
+          <label class="label label-title">手机颜色</label>
+          <label class="label result"></label>
+          <script type="text/template" id="phoneColor">
+            <div class="row-control" single-select>
+              {{each data}}
+              <div class="label-control {{if $index === 0}}selected{{/if}}"><label class="label">{{$value}}</label></div>
+              {{/each}}
+            </div>
+          </script>
+        </div>
+        <div class="btn-control">
+          <a class="button cancel" href="javascript:history.back(-1);">上一步</a>
+          <a class="button submit" href="javascript:;">确认申请</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
