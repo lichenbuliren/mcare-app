@@ -4,6 +4,7 @@ import {OrderComponent} from "./order.component";
 import {OrderAddressComponent} from "./order-address/order-address.component";
 import {OrderDetailComponent} from "./order-detail/order-detail.component";
 import {OrderVerifyComponent} from "./order-verify/order-verify.component";
+import {OrderService} from "./order.service";
 
 @NgModule({
   imports: [
@@ -12,10 +13,21 @@ import {OrderVerifyComponent} from "./order-verify/order-verify.component";
         path: 'order',
         component: OrderComponent,
         children: [
-          {path: '', component: OrderVerifyComponent},
-          {path: 'address', component: OrderAddressComponent},
-          {path: 'detail', component: OrderDetailComponent}
+          {path: '', component: OrderVerifyComponent}
         ]
+      },
+      {
+        path: 'order/verify',
+        component: OrderVerifyComponent,
+      },
+      {
+        path: 'order/address',
+        canActivate: [OrderService],
+        component: OrderAddressComponent,
+      },
+      {
+        path: 'order/detail',
+        component: OrderDetailComponent
       }
     ])
   ],
