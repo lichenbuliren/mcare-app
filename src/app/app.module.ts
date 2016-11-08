@@ -10,12 +10,14 @@ import {IndexComponent } from './index/index.component';
 import {DeliveryModule} from './delivery/delivery.module';
 import {HomeModule} from "./home/home.module";
 import {OrderModule} from "./order/order.module";
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    IndexComponent
+    IndexComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

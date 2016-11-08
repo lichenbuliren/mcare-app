@@ -8,28 +8,21 @@ import {OrderService} from "./order.service";
 
 @NgModule({
   imports: [
-    RouterModule.forChild([
-      {
-        path: 'order',
-        component: OrderComponent,
-        children: [
-          {path: '', component: OrderVerifyComponent}
-        ]
-      },
-      {
-        path: 'order/verify',
-        component: OrderVerifyComponent,
-      },
-      {
-        path: 'order/address',
-        canActivate: [OrderService],
-        component: OrderAddressComponent,
-      },
-      {
-        path: 'order/detail',
-        component: OrderDetailComponent
-      }
-    ])
+    RouterModule.forChild([{
+      path: 'order',
+      redirectTo: 'order/verify',
+      pathMatch: 'full'
+    }, {
+      path: 'order/verify',
+      component: OrderVerifyComponent,
+    }, {
+      path: 'order/address',
+      canActivate: [OrderService],
+      component: OrderAddressComponent,
+    }, {
+      path: 'order/detail',
+      component: OrderDetailComponent
+    }])
   ],
   exports: [
     RouterModule

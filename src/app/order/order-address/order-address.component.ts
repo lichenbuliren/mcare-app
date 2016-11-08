@@ -16,6 +16,7 @@ import {
           transform: 'translateX(0)'
         })
       ),
+      //  void => *
       transition(':enter', [
         style({
           opacity: 0,
@@ -23,6 +24,7 @@ import {
         }),
         animate('0.2s ease-in')
       ]),
+      // * => void
       transition(':leave', [
         animate('0.2s ease-out', style({
           opacity: 0,
@@ -38,13 +40,13 @@ export class OrderAddressComponent implements OnInit {
     return true;
   }
 
-  @HostBinding('style.display') get display() {
-    return 'block';
-  }
-
-  @HostBinding('style.position') get position() {
-    return 'absolute';
-  }
+  // @HostBinding('style.display') get display() {
+  //   return 'block';
+  // }
+  //
+  // @HostBinding('style.position') get position() {
+  //   return 'absolute';
+  // }
 
 
   constructor() {
