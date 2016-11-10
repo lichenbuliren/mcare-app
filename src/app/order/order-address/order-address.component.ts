@@ -40,13 +40,13 @@ export class OrderAddressComponent implements OnInit {
     return true;
   }
 
-  // @HostBinding('style.display') get display() {
-  //   return 'block';
-  // }
-  //
-  // @HostBinding('style.position') get position() {
-  //   return 'absolute';
-  // }
+  @HostBinding('style.display') get display() {
+    return 'block';
+  }
+
+  @HostBinding('style.position') get position() {
+    return 'absolute';
+  }
 
 
   constructor() {
