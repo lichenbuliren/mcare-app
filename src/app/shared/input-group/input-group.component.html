@@ -1,0 +1,20 @@
+<div class="input-group">
+  <ng-content #input-label></ng-content>
+  <input #input class="input-control"
+         [type]="type"
+         [id]="inputId"
+         [disabled]="disabled"
+         [attr.name]="name"
+         [attr.max]="max"
+         [attr.min]="min"
+         [attr.maxlength]="maxlength"
+         [attr.minlength]="minlength"
+         [placeholder]="placeholder"
+         [readonly]="readonly"
+         [required]="required"
+         (focus)="_handleFocus(input.value)"
+         (blur)="_handleBlur(input.value)"
+         [(ngModel)]="value"
+         (change)="_handleChange($event)">
+  <ng-content #input-icon></ng-content>
+</div>
