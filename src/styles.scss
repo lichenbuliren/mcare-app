@@ -45,9 +45,9 @@
     line-height: 1;
     border-bottom: 1px solid rgba(0, 0, 0, .05);
 
-    &:last-child {
-      border-bottom: 0;
-    }
+    //&:last-child {
+    //  border-bottom: 0;
+    //}
 
     // 验证错误
     &.error {
@@ -72,7 +72,7 @@
       padding: px2rem(60) 0 px2rem(60) px2rem(36);
       color: #000;
 
-      &::placeholder{
+      &::-webkit-input-placeholder{
         color: #000;  /* change [placeholder color] by this*/
         text-shadow: none;
         -webkit-text-fill-color: rgba(0, 0, 0, .3);
@@ -87,7 +87,7 @@
       // 聚焦的时候，改变指针样式
       input {
         color: #18BD91;  /* change [input cursor color] by this*/
-        text-shadow: 0px 0px 0px #000; /* change [input font] by this*/
+        text-shadow: 0 0 0 #000; /* change [input font] by this*/
         -webkit-text-fill-color: #000;
       }
     }
@@ -130,8 +130,8 @@
       display: block;
       visibility: hidden;
       background:url('/assets/global/images/icon-delete.png') center no-repeat;
-      width: px2rem(60);
-      height: px2rem(60);
+      width: px2rem(120);
+      height: px2rem(120);
       background-size: px2rem(54) px2rem(54);
 
       &.show {

@@ -10,16 +10,12 @@ import {IndexComponent } from './index/index.component';
 import {DeliveryModule} from './delivery/delivery.module';
 import {HomeModule} from "./home/home.module";
 import {OrderModule} from "./order/order.module";
-import { VerifyFormComponent } from './shared/verify-form/verify-form.component';
-import { InputControlComponent } from './shared/input-group/input-group.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    IndexComponent,
-    VerifyFormComponent,
-    InputControlComponent
+    IndexComponent
   ],
   imports: [
     BrowserModule,

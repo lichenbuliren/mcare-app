@@ -1,0 +1,11 @@
+<div #inputControl class="input-control" [class.focus]="focused">
+  <input #input
+         [type]="type"
+         [name]="name"
+         (focus)="_handleFocus($event)"
+         [placeholder]="placeholder"
+         (change)="_handleChange($event)"
+         (blur)="_handleBlur($event)"
+         [(ngModel)]="value">
+  <i #iconDelete class="icon icon-delete" [class.show]="focused" (click)="_handleClear($event)"></i>
+</div>

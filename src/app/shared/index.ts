@@ -1,1 +1,1 @@
-export * from './input-group/input-group.component';
+export * from './input-control/input-control.component';
