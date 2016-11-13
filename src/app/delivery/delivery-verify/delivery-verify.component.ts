@@ -9,11 +9,20 @@ import {InputControlComponent} from "../../shared/input-control/input-control.co
 })
 export class DeliveryVerifyComponent implements OnInit {
   title = 'delivery verify works';
+  username: string;
+  mobile: string;
 
   constructor() {
+    this.username = '魏如峰';
+    this.mobile = '13602532846';
+    console.log(this.username, this.mobile);
   }
 
   ngOnInit() {
+  }
+
+  onInputControlFocus() {
+    console.log('child input-control focused');
   }
 
 }

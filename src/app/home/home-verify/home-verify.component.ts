@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-verify.component.scss']
 })
 export class HomeVerifyComponent implements OnInit {
+  username: string = 'wrf';
 
   constructor() { }
 
