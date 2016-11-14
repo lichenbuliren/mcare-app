@@ -22,8 +22,20 @@ export class DeliveryVerifyComponent implements OnInit {
   ngOnInit() {
   }
 
-  onInputControlFocus() {
-    console.log('child input-control focused');
+  onSubmit() {
+    console.log(this.username, this.mobile);
   }
+
+  // 监听子元素聚焦事件
+  // onInputControlFocus() {
+  //   console.log('child input-control focused');
+  // }
+
+  // 监听子元素值的变化
+  // onInputChange(event) {
+  //   // 由于这是双向绑定，所以这里看到的是一样的值，
+  //   // 要看到不一样的值，可以在模板里面使用单项绑定
+  //   console.log(`监听到子元素输入值变化：${this.username} => ${event}`);
+  // }
 
 }

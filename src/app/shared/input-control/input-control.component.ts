@@ -1,4 +1,5 @@
 import {
+  forwardRef,
   Component,
   HostListener,
   Input,
@@ -6,10 +7,16 @@ import {
   ElementRef,
   EventEmitter,
   Output,
-  ViewEncapsulation, OnInit,
+  ViewEncapsulation
 } from '@angular/core';
-import {ControlValueAccessor} from '@angular/forms';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
+
+export const INPUT_CONTROL_VALUE_ACCESSOR: any = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => InputControlComponent),
+  multi: true
+};
 
 const noop = () => {
 };
@@ -24,9 +31,10 @@ const noop = () => {
     // 切换宿主元素 focus 样式
     // '[class.focus]': 'focused'
   },
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [INPUT_CONTROL_VALUE_ACCESSOR]
 })
-export class InputControlComponent implements ControlValueAccessor, OnInit {
+export class InputControlComponent implements ControlValueAccessor {
   private _focused: boolean = false;
   private _value: any = '';
 
@@ -37,6 +45,7 @@ export class InputControlComponent implements ControlValueAccessor, OnInit {
 
   private _focusEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   private _blurEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  private _inputChangeEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   // 外部传入属性
   @Input() type: string = 'text';
@@ -58,7 +67,7 @@ export class InputControlComponent implements ControlValueAccessor, OnInit {
   inputControlBlurHandler(event) {
     var parent = event.target;
     // 如何当前节点不是宿主节点，并且不等于 document 节点
-    while (parent != this._inputControlElement.nativeElement && parent != document) {
+    while (parent && parent != this._inputControlElement.nativeElement && parent != document) {
       // 取当前节点的父节点继续寻找
       parent = parent.parentNode;
     }
@@ -84,6 +93,7 @@ export class InputControlComponent implements ControlValueAccessor, OnInit {
     if (v !== this._value) {
       this._value = v;
       this._onChangeCallback(v);
+      this._inputChangeEmitter.emit(v);
     }
   }
 
@@ -97,26 +107,29 @@ export class InputControlComponent implements ControlValueAccessor, OnInit {
     return this._blurEmitter.asObservable();
   }
 
+  // 对外暴露事件
+  @Output('inputChange')
+  get onInputChange(): Observable<any> {
+    return this._inputChangeEmitter.asObservable();
+  }
 
-  /** Set focus on input */
+
+  // 输入框聚焦
   focus() {
     this._inputElement.nativeElement.focus();
   }
 
   _handleFocus(event: FocusEvent) {
-    console.log('focus event triggered');
     this._focused = true;
     this._focusEmitter.emit(event);
   }
 
   _handleClear() {
-    console.log('clear event triggered');
     this.value = '';
     return false;
   }
 
   _handleBlur(event: FocusEvent) {
-    console.log('blur event triggered');
     this._blurEmitter.emit(event);
   }
 

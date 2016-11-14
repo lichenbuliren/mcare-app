@@ -3,15 +3,16 @@
     <div class="content">
       <form class="form">
         <div class="row-control">
-          <input-control type="text" name="username" placeholder="姓名" value="{{username}}" (focus)="onInputControlFocus()"></input-control>
-          <input-control type="text" name="mobile" placeholder="手机号" maxlength="11" minlength="11"></input-control>
+          <input-control type="text" name="username" placeholder="姓名" [(ngModel)]="username" (inputChange)="onInputChange($event)" (focus)="onInputControlFocus()"></input-control>
+          <input-control type="text" name="mobile" placeholder="手机号" [(ngModel)]="mobile" maxlength="11" minlength="11"></input-control>
           <div class="input-control sms-control">
-            <input type="tel" maxlength="6" name="sms-code" placeholder="短信验证码">
+            <input type="tel" maxlength="6" name="sms-code" placeholder="短信验证码" [(ngModel)]="username">
             <a href="javascript:;" class="btn-send-sms" data-time="60">获取验证码</a>
           </div>
         </div>
         <div class="row-control btn-control">
-          <a class="button submit" routerLink="submit">下一步</a>
+          <a class="button submit" (click)="onSubmit()">下一步</a>
+          <!--<a class="button submit" routerLink="submit">下一步</a>-->
         </div>
       </form>
     </div>
