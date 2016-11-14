@@ -9,7 +9,7 @@
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   @include font-dpr(16px);
-  font-family: 'Source Han Sans',Helvetica, Tahoma, Arial, 'Hiragino Sans GB', "Microsoft YaHei", SimSun, Heiti, sans-serif;
+  font-family: 'Source Han Sans', Helvetica, Tahoma, Arial, 'Hiragino Sans GB', "Microsoft YaHei", SimSun, Heiti, sans-serif;
 }
 
 // clearfix
@@ -17,6 +17,7 @@
   overflow: auto;
   zoom: 1;
 }
+
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -34,7 +35,7 @@
   box-sizing: border-box;
 
   .input-control,
-  .label-control{
+  .label-control {
     position: relative;
     overflow: hidden;
     display: block;
@@ -44,10 +45,6 @@
     @include font-dpr(16px);
     line-height: 1;
     border-bottom: 1px solid rgba(0, 0, 0, .05);
-
-    //&:last-child {
-    //  border-bottom: 0;
-    //}
 
     // 验证错误
     &.error {
@@ -69,11 +66,11 @@
       @include font-dpr(16px);
       width: 100%;
       outline: none;
-      padding: px2rem(60) 0 px2rem(60) px2rem(36);
+      padding: px2rem(60) px2rem(36);
       color: #000;
 
-      &::-webkit-input-placeholder{
-        color: #000;  /* change [placeholder color] by this*/
+      &::-webkit-input-placeholder {
+        color: #000; /* change [placeholder color] by this*/
         text-shadow: none;
         -webkit-text-fill-color: rgba(0, 0, 0, .3);
       }
@@ -86,13 +83,13 @@
 
       // 聚焦的时候，改变指针样式
       input {
-        color: #18BD91;  /* change [input cursor color] by this*/
+        color: #18BD91; /* change [input cursor color] by this*/
         text-shadow: 0 0 0 #000; /* change [input font] by this*/
         -webkit-text-fill-color: #000;
       }
     }
 
-    .label{
+    .label {
       font-size: inherit;
       text-align: left;
       float: left;
@@ -112,24 +109,24 @@
         padding: 0;
         transform: translateY(-50%);
         overflow: hidden;
-        white-space:nowrap;
+        white-space: nowrap;
         text-overflow: ellipsis;
       }
     }
 
-    .icon{
+    .icon {
       position: absolute;
       z-index: 4;
       top: 50%;
       transform: translateY(-50%);
-      right: px2rem(36);
+      right: 0;
     }
 
     // 删除内容图标
     .icon-delete {
       display: block;
       visibility: hidden;
-      background:url('/assets/global/images/icon-delete.png') center no-repeat;
+      background: url('/assets/global/images/icon-delete.png') center no-repeat;
       width: px2rem(120);
       height: px2rem(120);
       background-size: px2rem(54) px2rem(54);
@@ -139,15 +136,15 @@
       }
     }
 
-    .icon-radio{
+    .icon-radio {
       width: px2rem(72);
       height: px2rem(72);
       border-radius: 50%;
       border: 1px solid #DADADA;
 
-      &.icon-checked{
+      &.icon-checked {
         border: 0;
-        background:url('/assets/global/images/radio-checked.png') center no-repeat;
+        background: url('/assets/global/images/radio-checked.png') center no-repeat;
         background-size: px2rem(72);
       }
     }
@@ -161,7 +158,7 @@
   }
 
   // 注释
-  .remark{
+  .remark {
     opacity: .5;
     padding: px2rem(30) 0;
     padding-left: px2rem(36);
@@ -169,14 +166,14 @@
   }
 }
 
-.btn-control{
+.btn-control {
   width: px2rem(858);
   border-bottom: 0;
   margin: px2rem(90) auto 0;
   text-align: center;
 
   // 公共按钮
-  .button{
+  .button {
     display: inline-block;
     width: px2rem(720);
     height: px2rem(114);
@@ -201,7 +198,7 @@
   overflow: scroll;
 }
 
-.address-selector-wrapper{
+.address-selector-wrapper {
   padding: 0 px2rem(36);
   position: relative;
 
@@ -217,7 +214,7 @@
     margin: 0;
     border-bottom: 1px solid rgba(0, 0, 0, .05);
 
-    &::after{
+    &::after {
       position: absolute;
       content: '';
       right: px2rem(36);
@@ -246,7 +243,7 @@
     display: block;
     background: #fff;
 
-    .item-list{
+    .item-list {
       position: relative;
       cursor: pointer;
       width: inherit;
@@ -271,7 +268,7 @@
   }
 
   .row-control {
-    .input-control{
+    .input-control {
       overflow: hidden;
       border-bottom: 1px solid rgba(0, 0, 0, .05);
     }
@@ -285,10 +282,10 @@
   @include font-dpr(12px);
   display: none;
 
-  $childWidth1:12%;
-  $childWidth2:32%;
-  $childWidth3:26%;
-  $childWidth4:30%;
+  $childWidth1: 12%;
+  $childWidth2: 32%;
+  $childWidth3: 26%;
+  $childWidth4: 30%;
 
   tr {
     td {
@@ -337,7 +334,7 @@
   padding: 0 px2rem(36) px2rem(36);
 
   .list-item {
-    border-bottom: 1px solid rgba(0,0,0,.05);
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
     cursor: pointer;
     overflow: hidden;
     line-height: 1.6;
@@ -364,16 +361,16 @@
     }
 
     &.list-item-active {
-      .title{
-        border-bottom: 1px solid rgba(0,0,0,.05);
+      .title {
+        border-bottom: 1px solid rgba(0, 0, 0, .05);
 
-        &::after{
+        &::after {
           transform-origin: center;
           transform: rotate(0);
         }
       }
 
-      .table-list{
+      .table-list {
         display: table;
       }
     }

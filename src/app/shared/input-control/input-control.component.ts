@@ -22,7 +22,7 @@ const noop = () => {
     // 宿主元素 click 事件，触发 focus() 事件
     '(click)': 'focus()',
     // 切换宿主元素 focus 样式
-    '[class.focus]': 'focused'
+    // '[class.focus]': 'focused'
   },
   encapsulation: ViewEncapsulation.None
 })
@@ -43,15 +43,14 @@ export class InputControlComponent implements ControlValueAccessor, OnInit {
   @Input() name: string = null;
   @Input() placeholder: string = null;
 
-  // @ViewChild('inputControl') _inputControlElement: ElementRef;
+  @ViewChild('inputControl') _inputControlElement: ElementRef;
   @ViewChild('input') _inputElement: ElementRef;
   @ViewChild('iconDelete') iconDelete: ElementRef;
 
-  constructor(private hostRef: ElementRef) {
+  constructor() {
   }
 
   ngOnInit() {
-    console.log(this.hostRef.nativeElement);
   }
 
   // 监听全局的点击事件，如果不是当前 input-control 组，则视为失去焦点操作
@@ -59,7 +58,7 @@ export class InputControlComponent implements ControlValueAccessor, OnInit {
   inputControlBlurHandler(event) {
     var parent = event.target;
     // 如何当前节点不是宿主节点，并且不等于 document 节点
-    while (parent != this.hostRef.nativeElement && parent != document) {
+    while (parent != this._inputControlElement.nativeElement && parent != document) {
       // 取当前节点的父节点继续寻找
       parent = parent.parentNode;
     }

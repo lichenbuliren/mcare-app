@@ -4,6 +4,7 @@ import {Component, OnInit} from '@angular/core';
   selector: 'app-order-verify',
   templateUrl: './order-verify.component.html',
   styleUrls: ['./order-verify.component.scss']
+
 })
 export class OrderVerifyComponent implements OnInit {
 
