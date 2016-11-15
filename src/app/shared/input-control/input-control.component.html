@@ -7,6 +7,6 @@
          (change)="_handleChange($event)"
          (blur)="_handleBlur($event)"
          [(ngModel)]="value">
-  <i #iconDelete class="icon icon-delete" [class.show]="focused" (click)="_handleClear($event)"></i>
+  <i #iconDelete *ngIf="focused" class="icon icon-delete" (click)="_handleClear($event)"></i>
 </div>
 

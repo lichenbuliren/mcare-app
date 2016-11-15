@@ -1,17 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { InputControlComponent } from "../../shared/input-control/input-control.component";
 
 @Component({
   selector: 'delivery-verify',
   templateUrl: './delivery-verify.component.html',
   styleUrls: ['./delivery-verify.component.scss'],
-  providers: [InputControlComponent]
 })
 export class DeliveryVerifyComponent implements OnInit {
   title = 'delivery verify works';
   username: string;
   mobile: string;
   color: string = 'green';
+
+  counter: number = 60;
+  smsBtnTitle: string = '获取验证码';
+  smsBtnCountText: string = '秒后重新获取';
 
   constructor() {
     this.username = '魏如峰';

@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 @mixin clearfix {
   *zoom: 1;
   &:after, &:before {
@@ -21,11 +19,6 @@
   [data-dpr="3"] & {
     font-size: $font-size * 3;
   }
-}
-
-// 设计稿宽度1080，基准值为 1080/10
-@function px2rem($pixels, $context: 108) {
-  @return ($pixels / $context) * 1rem;
 }
 
 $fontFamily: Helvetica, Tahoma, Arial, 'Hiragino Sans GB', STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif;

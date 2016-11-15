@@ -1,0 +1,34 @@
+@import "../../assets/global/function";
+
+.service-list {
+  position: relative;
+  padding: px2rem(36);
+
+  .list-item {
+    $blockHeight: calc(100vh/3.2);
+    height: $blockHeight;
+    line-height: $blockHeight;
+    border-radius: 4px;
+    vertical-align: middle;
+    width:100%;
+    background-color: #7D88F2;
+    text-align: center;
+    color: #fff;
+    margin-bottom: px2rem(30);
+
+    .a {
+      display: block;
+      width: 100%;
+      height:100%;
+    }
+
+    &:first-child {
+      background-color: #7ED70B;
+    }
+
+    &:last-child {
+      background-color: #FB9538;
+      margin-bottom: 0;
+    }
+  }
+}

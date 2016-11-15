@@ -3,11 +3,12 @@
     <div class="content">
       <form class="form">
         <div class="row-control">
-          <input-control type="text" name="username" placeholder="姓名" [(ngModel)]="username" (inputChange)="onInputChange($event)" (focus)="onInputControlFocus()"></input-control>
+          <input-control type="text" name="username" placeholder="姓名" [(ngModel)]="username"></input-control>
           <input-control type="text" name="mobile" placeholder="手机号" [(ngModel)]="mobile" maxlength="11" minlength="11"></input-control>
           <div class="input-control sms-control">
             <input type="tel" maxlength="6" name="sms-code" placeholder="短信验证码" [(ngModel)]="username">
-            <a href="javascript:;" class="btn-send-sms" data-time="60">获取验证码</a>
+            <!--<a href="javascript:;" class="btn-send-sms" data-time="60">获取验证码</a>-->
+            <count-down class="btn-send-sms" counter="50" title="获取验证码" countText="秒后重新获取"></count-down>
           </div>
         </div>
         <div class="row-control btn-control">
