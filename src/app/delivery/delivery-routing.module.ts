@@ -11,10 +11,12 @@ import {DeliveryComponent} from "./delivery.component";
       {
         path: 'delivery',
         component: DeliveryComponent,
+        data: { title: '寄送快修'},
         children: [
-          {path: '', component: DeliveryVerifyComponent},
-          {path: 'verify', component: DeliveryVerifyComponent},
-          {path: 'submit', component: DeliverySubmitComponent}
+          {path: 'verify', component: DeliveryVerifyComponent, data: {title: '基础信息'}},
+          {path: 'submit', component: DeliverySubmitComponent, data: {title: '设备信息'}},
+          {path: '', redirectTo: 'verify'},
+          {path: '**', redirectTo: 'verify'}
         ]
       }
     ])

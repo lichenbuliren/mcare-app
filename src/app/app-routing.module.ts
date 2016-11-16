@@ -6,7 +6,8 @@ import {IndexComponent} from "./index/index.component";
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: '', component: IndexComponent }
+      { path: '', component: IndexComponent, data: { title: '我要维修'} },
+      { path: '**', redirectTo: ''}
     ])
   ],
   exports: [

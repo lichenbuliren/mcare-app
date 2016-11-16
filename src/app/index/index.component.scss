@@ -5,7 +5,7 @@
   padding: px2rem(36);
 
   .list-item {
-    $blockHeight: calc(100vh/3.2);
+    $blockHeight: calc(100vh/3.56);
     height: $blockHeight;
     line-height: $blockHeight;
     border-radius: 4px;
@@ -16,7 +16,7 @@
     color: #fff;
     margin-bottom: px2rem(30);
 
-    .a {
+    a {
       display: block;
       width: 100%;
       height:100%;

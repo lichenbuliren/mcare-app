@@ -1,11 +1,12 @@
 @charset "UTF-8";
 
-@import "../assets/global/_mixin";
-@import "../assets/global/_reset";
-@import "../assets/global/_function";
+@import "../assets/global/mixin";
+@import "../assets/global/reset";
+@import "../assets/global/function";
+@import "../assets/global/variables";
 
 .contanier {
-  background-color: #fff;
+  background-color: $bgColor;
   color: #000;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
