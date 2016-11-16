@@ -27,7 +27,7 @@ export class DeliveryRepair implements BaseRepair {
   rec_county: string = this.send_county;
   rec_area_code: string = this.send_area_code;
   outlets_code: number;
-  is_agress: boolean = false;
+  is_agree: boolean;
 
   constructor({
     mobile,
