@@ -20,9 +20,6 @@
       "styles": [
         "styles.scss"
       ],
-      "sassCompiler": {
-        "cacheExclude": [/\/_[^\/]+$/]
-      },
       "scripts": [],
       "environments": {
         "source": "environments/environment.ts",
