@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+@import "../../assets/global/variables";
+@import "../../assets/global/function";
+@import "../../assets/global/mixin";
+
+nav {
+  background-color: $mainColor;
+  color: #fff;
+  padding: px2rem(45) px2rem(54);
+  @include font-dpr(18px);
+
+  a {
+    display: inline-block;
+    height: 100%;
+    padding-right: 20px;
+    vertical-align: middle;
+  }
+
+  .icon,
+  .title {
+    display: inline-block;
+    margin-right: px2rem($bodyPadding);
+  }
+
+  .icon {
+    width: px2rem(33);
+    height: px2rem(58);
+    background: url("/assets/global/images/icon-back.png") center no-repeat;
+    background-size: px2rem(33) px2rem(58);
+  }
+}
