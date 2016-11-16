@@ -145,6 +145,9 @@
 }
 
 .input-control.sms-control {
+  input {
+    width: 50%;
+  }
   .icon {
     display: none;
   }

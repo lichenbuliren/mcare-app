@@ -1,3 +1,6 @@
+/**
+ * _function.scss
+ */
 // 设计稿宽度1080，基准值为 1080/10
 @function px2rem($pixels, $context: 108) {
   @return ($pixels / $context) * 1rem;
