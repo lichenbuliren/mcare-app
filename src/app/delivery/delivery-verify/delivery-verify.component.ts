@@ -1,24 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'delivery-verify',
   templateUrl: './delivery-verify.component.html',
   styleUrls: ['./delivery-verify.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DeliveryVerifyComponent implements OnInit {
   title = 'delivery verify works';
   username: string;
   mobile: string;
   color: string = 'green';
-
-  counter: number = 60;
-  smsBtnTitle: string = '获取验证码';
-  smsBtnCountText: string = '秒后重新获取';
+  captcha: string = '';
 
   constructor() {
     this.username = '魏如峰';
     this.mobile = '13602532846';
-    console.log(this.username, this.mobile);
   }
 
   ngOnInit() {

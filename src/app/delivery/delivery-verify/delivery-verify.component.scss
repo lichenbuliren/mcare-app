@@ -1,52 +1,24 @@
-// 设计稿宽度1080，基准值为 1080/10
-@function px2rem($pixels, $context: 108) {
-  @return ($pixels / $context) * 1rem;
-}
+@import "../../../assets/global/base";
 
-@mixin font-dpr($font-size){
-  font-size: $font-size;
+// 发送验证码
+.btn-send-sms {
+  position: absolute;
+  z-index: 3;
+  outline: none;
+  @include font-dpr(14px);
+  color: #18BD91;
+  right: 0;
+  top: px2rem(26);
+  padding: 0 px2rem(52);
+  height: px2rem(112);
+  line-height: px2rem(114);
+  text-align: center;
+  border: 1px solid #18BD91;
+  border-radius: px2rem(60);
+  cursor: pointer;
 
-  [data-dpr="2"] & {
-    font-size: $font-size * 2;
-  }
-
-  [data-dpr="3"] & {
-    font-size: $font-size * 3;
-  }
-}
-
-
-.container {
-  .row-control {
-    .sms-control {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-
-      &.error {
-        border-bottom: 0;
-      }
-    }
-  }
-
-  // 发送验证码
-  .btn-send-sms {
-    position: absolute;
-    z-index: 3;
-    outline: none;
-    @include font-dpr(14px);
-    color: #18BD91;
-    right: 0;
-    top: px2rem(26);
-    padding: 0 px2rem(52);
-    height: px2rem(112);
-    line-height: px2rem(114);
-    text-align: center;
-    border: 1px solid #18BD91;
-    border-radius: px2rem(60);
-    cursor: pointer;
-
-    &.timing{
-      color: #ccc;
-      border-color: #ccc;
-    }
+  &.timing{
+    color: #ccc;
+    border-color: #ccc;
   }
 }

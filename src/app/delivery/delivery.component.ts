@@ -1,15 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import { Title } from "@angular/platform-browser";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'delivery',
-  templateUrl: 'delivery.component.html'
+  templateUrl: 'delivery.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class DeliveryComponent implements OnInit {
-  constructor(private titleService: Title) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.titleService.setTitle('寄送快修');
   }
 }

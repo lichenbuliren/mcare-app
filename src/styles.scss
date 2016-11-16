@@ -1,24 +1,21 @@
 @charset "UTF-8";
 
-@import "./assets/global/mixin";
-@import "./assets/global/reset";
-@import "./assets/global/function";
-@import "./assets/global/variables";
+@import "./assets/global/base";
 
 .container {
+  font-family: Helvetica, Tahoma, Arial, 'Hiragino Sans GB', STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif;
   background-color: $bgColor;
   color: #000;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   @include font-dpr(16px);
-  font-family: Helvetica, Tahoma, Arial, 'Hiragino Sans GB', STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif;
+  padding: px2rem(0) px2rem($bodyPadding);
 }
 
 .row-control {
   position: relative;
   vertical-align: middle;
   @include font-dpr(16px);
-  padding: 0 px2rem(36);
   box-sizing: border-box;
 
   .input-control,
@@ -27,7 +24,6 @@
     overflow: hidden;
     display: block;
     box-sizing: border-box;
-    padding: 0;
     color: #000;
     @include font-dpr(16px);
     line-height: 1;
@@ -71,7 +67,7 @@
       // 聚焦的时候，改变指针样式
       input {
         color: #18BD91; /* change [input cursor color] by this*/
-        text-shadow: 0 0 0 #000; /* change [input font] by this*/
+        text-shadow: 0 0 0 transparent; /* change [input font] by this*/
         -webkit-text-fill-color: #000;
       }
     }
@@ -145,6 +141,12 @@
     padding: px2rem(30) 0;
     padding-left: px2rem(36);
     @include font-dpr(12px);
+  }
+}
+
+.input-control.sms-control {
+  .icon {
+    display: none;
   }
 }
 
@@ -365,7 +367,3 @@
   line-height: 1.5;
   color: #000;
 }
-
-
-
-

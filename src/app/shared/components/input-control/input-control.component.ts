@@ -12,6 +12,7 @@ import {
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 
+// 要实现双向数据绑定，这个不可少
 export const INPUT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => InputControlComponent),
@@ -29,7 +30,7 @@ const noop = () => {
     // 宿主元素 click 事件，触发 focus() 事件
     '(click)': 'focus()',
     // 切换宿主元素 focus 样式
-    // '[class.focus]': 'focused'
+    '[class.focus]': 'focused'
   },
   encapsulation: ViewEncapsulation.None,
   providers: [INPUT_CONTROL_VALUE_ACCESSOR]
@@ -43,20 +44,24 @@ export class InputControlComponent implements ControlValueAccessor {
   /** Callback registered via registerOnChange (ControlValueAccessor) */
   private _onChangeCallback: (_: any) => void = noop;
 
-  private _focusEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
-  private _blurEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
-  private _inputChangeEmitter: EventEmitter<any> = new EventEmitter<any>();
+  private _focusEmitter: EventEmitter<FocusEvent>;
+  private _blurEmitter: EventEmitter<FocusEvent>;
+  private _inputChangeEmitter: EventEmitter<any>;
 
   // 外部传入属性
   @Input() type: string = 'text';
   @Input() name: string = null;
   @Input() placeholder: string = null;
+  @Input() class: string = '';
 
   @ViewChild('inputControl') _inputControlElement: ElementRef;
   @ViewChild('input') _inputElement: ElementRef;
   @ViewChild('iconDelete') iconDelete: ElementRef;
 
-  constructor() {
+  constructor(private hostRef: ElementRef) {
+    this._focusEmitter = new EventEmitter<FocusEvent>();
+    this._blurEmitter = new EventEmitter<FocusEvent>();
+    this._inputChangeEmitter = new EventEmitter<any>();
   }
 
   ngOnInit() {
@@ -67,7 +72,7 @@ export class InputControlComponent implements ControlValueAccessor {
   inputControlBlurHandler(event) {
     var parent = event.target;
     // 如何当前节点不是宿主节点，并且不等于 document 节点
-    while (parent && parent != this._inputControlElement.nativeElement && parent != document) {
+    while (parent && parent != this.hostRef.nativeElement && parent != document) {
       // 取当前节点的父节点继续寻找
       parent = parent.parentNode;
     }

@@ -1,14 +1,14 @@
 @charset "UTF-8";
 
-@import "../../assets/global/variables";
 @import "../../assets/global/function";
 @import "../../assets/global/mixin";
+@import "../../assets/global/variables";
 
 nav {
   background-color: $mainColor;
   color: #fff;
   padding: px2rem(45) px2rem(54);
-  @include font-dpr(18px);
+  @include font-dpr(16px);
 
   a {
     display: inline-block;

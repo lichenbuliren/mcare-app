@@ -2,7 +2,7 @@
 
 .service-list {
   position: relative;
-  padding: px2rem(36);
+  padding: px2rem(36) 0;
 
   .list-item {
     $blockHeight: calc(100vh/3.56);
