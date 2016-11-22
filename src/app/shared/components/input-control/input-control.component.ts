@@ -38,30 +38,57 @@ const noop = () => {
 export class InputControlComponent implements ControlValueAccessor {
   private _focused: boolean = false;
   private _value: any = '';
+  private _disabled: boolean = false;
+  private _readonly: boolean = false;
+  private _required: boolean = false;
 
-  /** Callback registered via registerOnTouched (ControlValueAccessor) */
+  /** Callback registered via registerOnTouched (ControlValueAccessor)
+   * 此属性在做表单校验的时候，不可少，
+   * 如果缺少了这个属性，FormControl.touched 属性将监测不到，切记！！
+   */
   private _onTouchedCallback: () => void = noop;
   /** Callback registered via registerOnChange (ControlValueAccessor) */
   private _onChangeCallback: (_: any) => void = noop;
 
-  private _focusEmitter: EventEmitter<FocusEvent>;
-  private _blurEmitter: EventEmitter<FocusEvent>;
-  private _inputChangeEmitter: EventEmitter<any>;
+  private _focusEmitter: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  private _blurEmitter: EventEmitter<any> = new EventEmitter<any>();
+  private _inputChangeEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   // 外部传入属性
   @Input() type: string = 'text';
   @Input() name: string = null;
   @Input() placeholder: string = null;
-  @Input() class: string = '';
+  @Input() minlength: number;
+  @Input() maxlength: number;
 
-  @ViewChild('inputControl') _inputControlElement: ElementRef;
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  set disabled(value) {
+    this._disabled = this._coerceBooleanProperty(value);
+  }
+
+  @Input()
+  get readonly(): boolean {
+    return this._readonly;
+  }
+  set readonly(value) {
+    this._readonly = this._coerceBooleanProperty(value);
+  }
+
+  @Input()
+  get required(): boolean {
+    return this._required;
+  }
+  set required(value) {
+    this._required = this._coerceBooleanProperty(value);
+  }
+
   @ViewChild('input') _inputElement: ElementRef;
   @ViewChild('iconDelete') iconDelete: ElementRef;
 
   constructor(private hostRef: ElementRef) {
-    this._focusEmitter = new EventEmitter<FocusEvent>();
-    this._blurEmitter = new EventEmitter<FocusEvent>();
-    this._inputChangeEmitter = new EventEmitter<any>();
   }
 
   ngOnInit() {
@@ -97,49 +124,38 @@ export class InputControlComponent implements ControlValueAccessor {
     v = this._convertValueForInputType(v);
     if (v !== this._value) {
       this._value = v;
+      // 触发值改变事件，冒泡给父级
       this._onChangeCallback(v);
-      this._inputChangeEmitter.emit(v);
     }
   }
 
-  @Output('focus')
-  get onFocus(): Observable<FocusEvent> {
-    return this._focusEmitter.asObservable();
-  }
+  // 对外暴露 focus 事件
+  @Output('focus') onFocus = this._focusEmitter.asObservable();
 
-  @Output('blur')
-  get onBlur(): Observable<FocusEvent> {
-    return this._blurEmitter.asObservable();
-  }
-
-  // 对外暴露事件
-  @Output('inputChange')
-  get onInputChange(): Observable<any> {
-    return this._inputChangeEmitter.asObservable();
-  }
-
-
-  // 输入框聚焦
+  // 宿主聚焦
   focus() {
+    // 触发下面的 _handleFocus() 事件
     this._inputElement.nativeElement.focus();
   }
 
+  // 输入框聚焦
   _handleFocus(event: FocusEvent) {
     this._focused = true;
     this._focusEmitter.emit(event);
   }
 
-  _handleClear() {
-    this.value = '';
-    return false;
-  }
-
-  _handleBlur(event: FocusEvent) {
+  // 这里触发 blur 操作，但是不改变 this._focused 的值，
+  // 不然删除图标无法实现它的功能，
+  //设置 this._focused 的值将由上面的 @HostListener('window:click', ['$event']) 来处理
+  _handleBlur(event: any) {
+    this._onTouchedCallback();
     this._blurEmitter.emit(event);
   }
 
-  _handleChange(event: Event) {
-    this.value = (<HTMLInputElement>event.target).value;
+  // 清空输入值
+  _handleClear() {
+    this.value = '';
+    return false;
   }
 
   private _convertValueForInputType(v: any): any {
@@ -149,6 +165,10 @@ export class InputControlComponent implements ControlValueAccessor {
       default:
         return v;
     }
+  }
+
+  private _coerceBooleanProperty(value: any): boolean {
+    return value != null && `${value}` !== 'false';
   }
 
   /**
@@ -171,6 +191,5 @@ export class InputControlComponent implements ControlValueAccessor {
   registerOnTouched(fn: any) {
     this._onTouchedCallback = fn;
   }
-
 }
 

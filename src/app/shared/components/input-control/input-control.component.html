@@ -1,10 +1,13 @@
 <input #input
-       [type]="type"
-       [name]="name"
-       (focus)="_handleFocus($event)"
-       [placeholder]="placeholder"
-       (change)="_handleChange($event)"
-       (blur)="_handleBlur($event)"
-       [(ngModel)]="value">
-<i #iconDelete *ngIf="focused" class="icon icon-delete" (click)="_handleClear($event)"></i>
+  [type]="type"
+  [name]="name"
+  (focus)="_handleFocus($event)"
+  (blur)="_handleBlur($event)"
+  [placeholder]="placeholder"
+  [(ngModel)]="value"
+  [minlength]="minlength"
+  [maxlength]="maxlength"
+  [readonly]="readonly"
+  [disabled]="disabled">
+<i #iconDelete *ngIf="focused && !readonly" class="icon icon-delete" (click)="_handleClear($event)"></i>
 <ng-content></ng-content>

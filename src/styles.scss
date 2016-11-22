@@ -100,7 +100,7 @@
     .icon {
       position: absolute;
       z-index: 4;
-      top: 50%;
+      top: px2rem(87);
       transform: translateY(-50%);
       right: 0;
     }
@@ -167,12 +167,15 @@
     border-radius: px2rem(57);
     line-height: px2rem(114);
     padding: 0;
+    border: 0;
+    outline: 0;
     color: #fff;
     background-color: #18BD91;
     @include font-dpr(18px);
     text-align: center;
 
-    &.cancel {
+    &.cancel,
+    &[disabled] {
       background-color: #B3B3B3;
     }
   }
