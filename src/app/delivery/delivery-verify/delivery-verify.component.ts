@@ -26,8 +26,8 @@ export class DeliveryVerifyComponent implements OnInit {
 
   initForm() {
     this.verifyInfo = this.formBuilder.group({
-      'username': ['魏如峰', Validators.required],
-      'mobile': ['13602532846', ValidatorsService.mobileValidator],
+      'username': ['张三', Validators.required],
+      'mobile': ['13688888888', ValidatorsService.mobileValidator],
       'captcha': ['', Validators.required]
     });
 
