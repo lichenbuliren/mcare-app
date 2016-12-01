@@ -7,9 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { IndexComponent } from './index/index.component';
-import { DeliveryModule } from './delivery/delivery.module';
-import { HomeModule } from "./home/home.module";
-import { OrderModule } from "./order/order.module";
+import { DeliveryModule, HomeModule, OrderModule } from './modules/index';
+import { ValidatorsService } from './services/validators.service';
+import { RepairSharedService } from './services/repair-shared.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { OrderModule } from "./order/order.module";
     OrderModule,
     AppRoutingModule
   ],
-  providers: [Title],
+  providers: [Title, ValidatorsService, RepairSharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

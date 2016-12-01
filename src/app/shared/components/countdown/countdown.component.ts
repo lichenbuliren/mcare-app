@@ -13,7 +13,7 @@ import { Observable } from "rxjs";
 export class CountdownComponent implements OnInit {
   private timing: boolean = false;
   private _clickEmitter: EventEmitter<any>;
-  private text: string = 'xxx';
+  private text: string;
 
   @Input() counter: number = 0;
   @Input() title: string = '';
@@ -25,7 +25,6 @@ export class CountdownComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.counter, this.title, this.countText);
     this.text = this.title;
   }
 
@@ -36,7 +35,6 @@ export class CountdownComponent implements OnInit {
     } else {
       this._handleCount();
     }
-    console.log('button clicked');
   }
 
   @Output('click')

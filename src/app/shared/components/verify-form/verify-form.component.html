@@ -1,4 +1,4 @@
-<form *ngIf="formActive" class="form" [formGroup]="verifyInfo" (ngSubmit)="onSubmit()">
+<form *ngIf="formActive" class="form" [formGroup]="verifyFormGroup" (ngSubmit)="onSubmit($event)">
   <div class="row-control">
     <input-control class="input-control"
       [class.error]="!username.valid && username.touched"
@@ -29,7 +29,7 @@
     </input-control>
   </div>
   <div class="row-control btn-control">
-    <button class="button submit" [disabled]="!verifyInfo.valid" type="submit">下一步</button>
+    <button class="button submit" [disabled]="!verifyFormGroup.valid" type="submit">下一步</button>
   </div>
   <div class="row-control btn-control">
     <a class="button" href="javascript:;" (click)="resetForm()" type="submit">重置表单</a>
