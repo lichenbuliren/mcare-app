@@ -5,11 +5,10 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { IndexComponent } from './index/index.component';
 import { DeliveryModule, HomeModule, OrderModule } from './modules/index';
 import { ValidatorsService } from './services/validators.service';
-import { RepairSharedService } from './services/repair-shared.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,7 @@ import { RepairSharedService } from './services/repair-shared.service';
     OrderModule,
     AppRoutingModule
   ],
-  providers: [Title, ValidatorsService, RepairSharedService],
+  providers: [Title, ValidatorsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

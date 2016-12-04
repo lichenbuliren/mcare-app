@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
-import { RepairSharedService } from '../../../services/repair-shared.service';
 import { ValidatorsService } from '../../../services/validators.service';
 
 @Component({
@@ -18,7 +17,7 @@ export class VerifyFormComponent implements OnInit {
   mobile: AbstractControl;
   captcha: AbstractControl;
 
-  constructor(private formBuilder: FormBuilder, private sharedService: RepairSharedService) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.initForm();
@@ -40,8 +39,6 @@ export class VerifyFormComponent implements OnInit {
     event.preventDefault();
     // TODO 校验短信验证码是否正确，
     // 如果正确，则保存数据到单例模式的 service 内
-    this.sharedService.set('repairIndexData', JSON.stringify(this.verifyFormGroup.value));
-    console.log(JSON.parse(this.sharedService.get('repairIndexData')));
     return false;
   }
 

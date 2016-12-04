@@ -17,7 +17,6 @@ export class NavbarComponent implements OnInit {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this._title = this.getTitle(router.routerState, router.routerState.root).join(' - ');
-        console.log(this._title);
         titleService.setTitle(this._title);
       }
     });
