@@ -33,7 +33,8 @@ import { PopupComponent } from './components/popup/popup.component';
     VerifyFormComponent,
     NavbarComponent,
     PopupComponent
-  ]
+  ],
+  entryComponents: [InputControlComponent]
 })
 export class SharedModule {
 }

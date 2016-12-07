@@ -62,8 +62,8 @@
   }
 
   .modal-body {
-    padding-top: px2rem(216);
-    padding-bottom: px2rem(140);
+    padding: px2rem(216) px2rem(36) px2rem(140);
+    line-height: 1.6;
     max-height: px2rem(1280);
     overflow: hidden;
     overflow-y: scroll;

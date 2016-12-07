@@ -1,4 +1,18 @@
-import { Component, OnInit, Input, ViewEncapsulation, HostListener, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  OnInit,
+  Input,
+  ViewEncapsulation,
+  HostListener,
+  ElementRef,
+  ViewChild,
+  ViewContainerRef,
+  ComponentFactoryResolver,
+  AfterViewInit,
+} from '@angular/core';
+
+import { InputControlComponent } from '../input-control/input-control.component';
 
 @Component({
   selector: 'app-popup',
@@ -6,9 +20,13 @@ import { Component, OnInit, Input, ViewEncapsulation, HostListener, ElementRef, 
   styleUrls: ['./popup.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class PopupComponent implements OnInit {
-  title = '标题';
-  btnLen: number;
+export class PopupComponent implements OnInit, AfterViewInit {
+  _btnLen: number;
+  componentRef: ComponentRef<Component>
+  @ViewChild('modalBody', {read: ViewContainerRef}) dynamicTarget: ViewContainerRef;
+
+
+  @Input() title = '标题';
 
   // 弹层主区域
   @ViewChild('modalDialog') modalDialog: ElementRef;
@@ -18,13 +36,22 @@ export class PopupComponent implements OnInit {
     primary: '确定'
   };
 
+  get btnLen() {
+    return Object.keys(this.buttons).length;
+  }
+
   @Input() show: boolean = true;
 
-  constructor() { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+  }
 
   ngOnInit() {
-    this.btnLen = Object.keys(this.buttons).length;
-    console.log(this.btnLen);
+  }
+
+  ngAfterViewInit() {
+    let self = this;
+    let factory = this.componentFactoryResolver.resolveComponentFactory(InputControlComponent);
+    this.componentRef = this.dynamicTarget.createComponent(factory);
   }
 
   // 点击弹层主区域之外，关闭弹层
@@ -42,6 +69,10 @@ export class PopupComponent implements OnInit {
       console.log('out click');
       this.show = false;
     }
+  }
+
+  static open() {
+
   }
 
   close() {
