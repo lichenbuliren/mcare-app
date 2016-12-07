@@ -58,6 +58,7 @@ export class VerifyFormComponent implements OnInit {
 
   onSubmit(event) {
     event.preventDefault();
+
     // 校验短信验证码
     this.serviceSupport.checkSms({
       phone: this.mobile.value,
