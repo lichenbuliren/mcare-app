@@ -1,0 +1,121 @@
+@charset 'UTF-8';
+@import "../../../../assets/global/_function";
+@import "../../../../assets/global/_mixin";
+
+.no-scroll {
+  height: 100%;
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1050;
+  overflow: hidden;
+  outline: 0;
+  background-color: rgba(0, 0, 0, .2);
+}
+
+.modal-dialog {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  padding: 0 px2rem(54);
+  color: #262626;
+  font-size: px2rem(36);
+  transform: translate3d(-50%, -50%, 0);
+
+  .modal-content {
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+  }
+
+  .modal-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 px2rem(54);
+    overflow: hidden;
+    z-index: 999;
+
+    .row-control {
+      background-color: #fff;
+    }
+
+    .title {
+      line-height: 1;
+      position: relative;
+      overflow: hidden;
+      @include font-dpr(18px);
+      text-align: center;
+      padding: px2rem(80) 0;
+    }
+
+  }
+
+  .modal-body {
+    padding-top: px2rem(216);
+    padding-bottom: px2rem(140);
+    max-height: px2rem(1280);
+    overflow: hidden;
+    overflow-y: scroll;
+    z-index: 998;
+  }
+
+  .modal-footer {
+    width: 100%;
+    height: px2rem(140);
+    line-height: px2rem(140);
+    vertical-align: middle;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    box-sizing: border-box;
+    text-align: center;
+    @include font-dpr(16px);
+    z-index: 999;
+    border-top: 1px solid rgba(0, 0, 0, .05);
+
+    .button {
+      float: left;
+      width: 50%;
+      height: 100%;
+      box-sizing: border-box;
+      @include font-dpr(16px);
+      background-color: #fff;
+      border-right: 1px solid rgba(0, 0, 0, .05);
+
+      &:last-child {
+        border-right: 0;
+      }
+
+      &:hover,
+      &:focus {
+        background-image: none;
+        outline: none;
+      }
+
+      &.primary {
+        color: #18BD91;
+      }
+
+      &.cancel {
+        color: #262626;
+      }
+
+      &.full-fill {
+        width: 100%;
+      }
+    }
+
+  }
+
+}

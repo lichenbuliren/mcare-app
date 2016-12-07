@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+
+import { ServiceSupportService } from '../../../core/service-support.service';
+import { Config } from '../../../core/config';
 
 @Component({
   selector: 'delivery-device',
@@ -6,12 +10,28 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['delivery-submit.component.scss']
 })
 export class DeliverySubmitComponent implements OnInit {
-  title = 'delivery device works';
+  formActive: boolean = true;
+  deliveryFormGroup: FormGroup;
+  sn: AbstractControl;
 
-  constructor() {
+  localData: any;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private serviceSupport: ServiceSupportService) {
   }
 
   ngOnInit() {
+    if (localStorage.getItem(Config.DeliveryDataKey)) {
+      this.localData = JSON.parse(localStorage.getItem(Config.DeliveryDataKey));
+    } else {
+      this.localData = {};
+    }
+    this.deliveryFormGroup = this.formBuilder.group({
+      'sn': [this.localData.sn, Validators.required]
+    });
+
+    this.sn = this.deliveryFormGroup.controls['sn'];
   }
 
 }

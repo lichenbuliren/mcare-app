@@ -1,0 +1,20 @@
+<!-- 弹层 S -->
+<div *ngIf="show" class="modal" role="popup-dialog">
+  <div class="modal-dialog" #modalDialog>
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row-control">
+          <h4 class="title">{{title}}</h4>
+        </div>
+      </div>
+      <div class="modal-body" #modalBody>
+        这是内容部分
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="buttons.cancel" (click)="_handleCancel()" class="button cancel" [class.full-fill]="btnLen == 1" #cancel>{{buttons.cancel}}</button>
+        <button *ngIf="buttons.primary" (click)="_handlePrimary()" class="button primary" [class.full-fill]="btnLen == 1" #primary>{{buttons.primary}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 弹层 E -->

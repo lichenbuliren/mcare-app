@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'delivery-verify',
@@ -15,10 +16,17 @@ export class DeliveryVerifyComponent implements OnInit {
   mobile: AbstractControl;
   captcha: AbstractControl;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private router: Router,
+    private activateRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
 
+  }
+
+  onSubmit() {
+    this.router.navigate(['../submit'], { relativeTo: this.activateRoute});
+    console.log('提交表单');
   }
 }

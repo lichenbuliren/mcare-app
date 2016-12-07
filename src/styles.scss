@@ -9,7 +9,7 @@
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   @include font-dpr(16px);
-  padding: px2rem(0) px2rem($bodyPadding);
+  padding: 0;
 }
 
 .row-control {
@@ -17,6 +17,7 @@
   vertical-align: middle;
   @include font-dpr(16px);
   box-sizing: border-box;
+  padding: 0 px2rem($bodyPadding);
 
   .input-control,
   .label-control {
@@ -78,7 +79,6 @@
       float: left;
       color: inherit;
       width: initial;
-      display: inline-block;
       padding: px2rem(60) 0 px2rem(60) px2rem(36);
       line-height: 1;
 
@@ -102,7 +102,7 @@
       z-index: 4;
       top: px2rem(87);
       transform: translateY(-50%);
-      right: 0;
+      right: px2rem(36);;
     }
 
     // 删除内容图标
@@ -123,7 +123,7 @@
       &.icon-checked {
         border: 0;
         background: url('/assets/global/images/radio-checked.png') center no-repeat;
-        background-size: px2rem(72);
+        background-size: px2rem($bodyPadding);
       }
     }
 

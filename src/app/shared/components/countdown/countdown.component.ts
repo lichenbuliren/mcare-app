@@ -15,12 +15,12 @@ export class CountdownComponent implements OnInit {
   private _clickEmitter: EventEmitter<any>;
   private text: string;
 
-  @Input() counter: number = 0;
-  @Input() title: string = '';
-  @Input() countText: string = '';
+  @Input() counter: number = 60;
+  @Input() title: string;
+  @Input() countText: string;
+  @Input() mobile: string;
 
   constructor() {
-
     this._clickEmitter = new EventEmitter<any>();
   }
 
@@ -39,7 +39,6 @@ export class CountdownComponent implements OnInit {
 
   @Output('click')
   get onClick(): Observable<any> {
-
     return this._clickEmitter.asObservable();
   }
 

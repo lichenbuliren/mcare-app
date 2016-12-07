@@ -1,32 +1,32 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { IndexComponent } from './index/index.component';
-import { DeliveryModule, HomeModule, OrderModule } from './modules/index';
-import { ValidatorsService } from './services/validators.service';
-import { RepairSharedService } from './services/repair-shared.service';
+import { DeliveryModule, HomeModule, OrderModule } from './modules/';
+import { SharedModule } from './shared/shared.module';
+import { ValidatorsService } from './services/';
+import { ServiceSupportService } from './core/service-support.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     IndexComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    SharedModule,
     HttpModule,
+    JsonpModule,
     DeliveryModule,
     HomeModule,
     OrderModule,
     AppRoutingModule
   ],
-  providers: [Title, ValidatorsService, RepairSharedService],
+  providers: [Title, ValidatorsService, ServiceSupportService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

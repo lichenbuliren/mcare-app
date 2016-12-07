@@ -2,10 +2,10 @@
   <div class="content">
     <form class="form">
       <div class="row-control">
-        <div class="input-control">
-          <input type="text" name="sn" placeholder="手机 SN 码">
-          <i class="icon icon-delete"></i>
-        </div>
+        <input-control class="input-control" [class.error]="!sn.valid && sn.touched" type="text" name="sn" placeholder="手机 SN 码"
+          [formControl]="sn">
+          <p *ngIf="!sn.valid && sn.touched" class="error-tips">请输入手机号 SN 码</p>
+        </input-control>
       </div>
       <div class="row-control">
         <div class="label-control select-control service-type" data-target="serviceType">
@@ -14,14 +14,14 @@
           <label class="label result"></label>
           <!-- 服务类型 S -->
           <script type="text/template" id="serviceType">
-            <div class="row-control service-list" single-select>
-              {{each data}}
-              <div class="label-control" data-code="{{$index}}">
-                <label class="label">{{$value}}</label>
+              <div class="row-control service-list" single-select>
+                {{each data}}
+                <div class="label-control" data-code="{{$index}}">
+                  <label class="label">{{$value}}</label>
+                </div>
+                {{/each}}
               </div>
-              {{/each}}
-            </div>
-          </script>
+            </script>
           <!-- 服务类型 E -->
         </div>
         <div class="label-control select-control fault" data-target="fault">
@@ -30,15 +30,15 @@
           <label class="label result"></label>
           <!-- 故障类型 S -->
           <script type="text/template" id="fault">
-            <div class="row-control fault-list" multi-select>
-              {{each data}}
-              <div class="label-control"><label class="label">{{$value}}</label></div>
-              {{/each}}
-              <div class="input-control">
-                <input type="text" name="fault-remark" placeholder="输入其它原因">
+              <div class="row-control fault-list" multi-select>
+                {{each data}}
+                <div class="label-control"><label class="label">{{$value}}</label></div>
+                {{/each}}
+                <div class="input-control">
+                  <input type="text" name="fault-remark" placeholder="输入其它原因">
+                </div>
               </div>
-            </div>
-          </script>
+            </script>
           <!-- 故障类型 E -->
         </div>
       </div>
@@ -73,3 +73,4 @@
     </form>
   </div>
 </div>
+
