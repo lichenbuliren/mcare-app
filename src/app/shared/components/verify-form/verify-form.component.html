@@ -1,4 +1,5 @@
 <form *ngIf="formActive" class="form" [formGroup]="verifyFormGroup" (ngSubmit)="onSubmit($event)">
+
   <div class="row-control">
     <input-control class="input-control"
       [class.error]="!username.valid && username.touched"
