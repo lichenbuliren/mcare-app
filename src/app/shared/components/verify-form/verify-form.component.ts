@@ -18,6 +18,7 @@ export class VerifyFormComponent implements OnInit {
   username: AbstractControl;
   mobile: AbstractControl;
   captcha: AbstractControl;
+
   // 本地缓存数据
   localData: any;
 
