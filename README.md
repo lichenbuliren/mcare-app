@@ -1,13 +1,3 @@
-title: 自定义angular2输入组件
-date: 2016-11-24 19:17:44
-tags: 
-- angular2
-
-categories:
-- JavaScript
-- angular2.js
----
-
 ## 构建一个自定义 angular2 输入组件
 今天我们来学习如何正确的构建和一个具有和 `<input type="text">` 同样作用，但同时也具有自己的逻辑的输入组件。
 
