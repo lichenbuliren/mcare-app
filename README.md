@@ -15,7 +15,7 @@ categories:
 
 我们先来看一下我们这篇文章里面所介绍的组件的表现形式是怎么样的：
 
-![目标图](/images/angular2/angular2-demo.gif)
+![目标图](./angular2-demo.gif)
 
 OK，上图就是我们所要达到的效果了。那么，我们来分析下我们这个组件改具备哪些功能。
 
