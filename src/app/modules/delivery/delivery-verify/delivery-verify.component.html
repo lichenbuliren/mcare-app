@@ -1,6 +1,6 @@
 <div class="container">
   <app-verify-form (submit)="onSubmit($event)"></app-verify-form>
-   <app-popup #popup
+   <modal #modal
     title="自定义弹窗"
     cancelButtonLabel="取消"
     submitButtonLabel="确定"
@@ -9,15 +9,16 @@
     [closeOnOutsideClick]="true"
     (onOpen)="activeOnOpen()"
     (onClose)="actionOnClose()"
-    (onSubmit)="actionOnSubmit()">
+    (onSubmit)="actionOnSubmit()"
+    [(isOpened)]="dialogShow">
 
     <div modal-content>
       hello world!
     </div>
 
     <div modal-footer>
-      <button class="btn btn-primary" (click)="popup.close()">close</button>
+      <button class="btn btn-primary" (click)="modal.close()">close</button>
     </div>
-  </app-popup>
+  </modal>
 </div>
 

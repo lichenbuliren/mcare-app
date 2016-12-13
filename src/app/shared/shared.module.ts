@@ -7,7 +7,7 @@ import { InputControlComponent } from './components/input-control/input-control.
 import { CountdownComponent } from './components/countdown/countdown.component';
 import { VerifyFormComponent } from './components/verify-form/verify-form.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { PopupComponent } from './components/popup/popup.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   imports: [
@@ -21,7 +21,7 @@ import { PopupComponent } from './components/popup/popup.component';
     CountdownComponent,
     VerifyFormComponent,
     NavbarComponent,
-    PopupComponent
+    ModalComponent
   ],
   exports: [
     CommonModule,
@@ -32,7 +32,7 @@ import { PopupComponent } from './components/popup/popup.component';
     CountdownComponent,
     VerifyFormComponent,
     NavbarComponent,
-    PopupComponent
+    ModalComponent
   ],
   entryComponents: [InputControlComponent]
 })

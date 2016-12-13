@@ -17,12 +17,12 @@ import {
 // import { InputControlComponent } from '../input-control/input-control.component';
 
 @Component({
-  selector: 'app-popup',
-  templateUrl: './popup.component.html',
-  styleUrls: ['./popup.component.scss'],
+  selector: 'modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class PopupComponent implements OnInit {
+export class ModalComponent implements OnInit {
 
   // =======================
   // 输入属性
@@ -52,7 +52,7 @@ export class PopupComponent implements OnInit {
 
   @Output() onSubmit = new EventEmitter(false);
 
-  @Output() isOpenedChange = new EventEmitter(false);
+  @Output() isOpenedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   // =======================
   // 公共属性
@@ -141,7 +141,6 @@ export class PopupComponent implements OnInit {
 
     // 找到最顶层，则表示已经不在宿主元素内部了，触发失去焦点 fn
     if (parent == document) {
-      console.log('out click');
       this.isOpened = false;
     }
   }
