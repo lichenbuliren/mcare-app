@@ -3,6 +3,7 @@ import {
   ComponentRef,
   OnInit,
   Input,
+  Output,
   ViewEncapsulation,
   HostListener,
   ElementRef,
@@ -10,9 +11,10 @@ import {
   ViewContainerRef,
   ComponentFactoryResolver,
   AfterViewInit,
+  EventEmitter,
 } from '@angular/core';
 
-import { InputControlComponent } from '../input-control/input-control.component';
+// import { InputControlComponent } from '../input-control/input-control.component';
 
 @Component({
   selector: 'app-popup',
@@ -20,38 +22,111 @@ import { InputControlComponent } from '../input-control/input-control.component'
   styleUrls: ['./popup.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class PopupComponent implements OnInit, AfterViewInit {
-  _btnLen: number;
+export class PopupComponent implements OnInit {
+
+  // =======================
+  // 输入属性
+  // =======================
+
+  @Input() isOpened = false;
+
+  @Input() clazz: string;
+
+  @Input() closeOnEscape: boolean = true;
+
+  @Input() closeOnOutsideClick: boolean = true;
+
+  @Input() title: string;
+
+  @Input() cancelButtonLabel: string;
+
+  @Input() submitButtonLabel: string;
+
+  // =======================
+  // 输出属性
+  // =======================
+
+  @Output() onOpen = new EventEmitter(false);
+
+  @Output() onClose = new EventEmitter(false);
+
+  @Output() onSubmit = new EventEmitter(false);
+
+  @Output() isOpenedChange = new EventEmitter(false);
+
+  // =======================
+  // 公共属性
+  // =======================
+
+  @ViewChild('modalRoot') public modalRoot: ElementRef;
+
+  // =======================
+  // 私有属性
+  // =======================
+  private backdropElement: HTMLElement;
+
   componentRef: ComponentRef<Component>
   @ViewChild('modalBody', {read: ViewContainerRef}) dynamicTarget: ViewContainerRef;
 
-
-  @Input() title = '标题';
-
-  // 弹层主区域
-  @ViewChild('modalDialog') modalDialog: ElementRef;
-
-  @Input() buttons = {
-    cancel: '取消',
-    primary: '确定'
-  };
-
-  get btnLen() {
-    return Object.keys(this.buttons).length;
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+    this.createBackDrop();
   }
 
-  @Input() show: boolean = true;
+  ngOnDestroy() {
+    if (this.backdropElement && this.backdropElement.parentNode === document.body) document.body.removeChild(this.backdropElement);
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngOnInit() {
   }
 
-  ngAfterViewInit() {
-    let self = this;
-    let factory = this.componentFactoryResolver.resolveComponentFactory(InputControlComponent);
-    this.componentRef = this.dynamicTarget.createComponent(factory);
+  // ngAfterViewInit() {
+  //   let self = this;
+  //   let factory = this.componentFactoryResolver.resolveComponentFactory(InputControlComponent);
+  //   this.componentRef = this.dynamicTarget.createComponent(factory);
+  // }
+
+
+  open(...args: any[]) {
+    if (this.isOpened) return;
+
+    this.isOpened = true;
+    this.isOpenedChange.emit(true);
+    this.onOpen.emit(args);
+
+    // TODO 这里可以动态插入其它组件
+     document.body.appendChild(this.backdropElement);
+     window.setTimeout(() => this.modalRoot.nativeElement.focus(), 0);
+  }
+
+  close(...args: any[]) {
+    if (!this.isOpened) return;
+
+    this.isOpened = false;
+    this.isOpenedChange.emit(false);
+    this.onClose.emit(args);
+    document.body.removeChild(this.backdropElement);
+  }
+
+  submit() {
+    this.onSubmit.emit({
+      province: '广东',
+      city: '深圳'
+    });
+
+    this.close();
+  }
+
+  public preventClosing(event: MouseEvent) {
+    event.stopPropagation();
+  }
+
+  // 动态创建蒙层
+  private createBackDrop() {
+    this.backdropElement = document.createElement('div');
+    this.backdropElement.classList.add('modal-mask');
+    this.backdropElement.classList.add('fade');
+    this.backdropElement.classList.add('in');
   }
 
   // 点击弹层主区域之外，关闭弹层
@@ -59,7 +134,7 @@ export class PopupComponent implements OnInit, AfterViewInit {
   handleClose(event) {
     var parent = event.target;
     // 如何当前节点不是宿主节点，并且不等于 document 节点
-    while (parent && this.modalDialog && parent != this.modalDialog.nativeElement && parent != document) {
+    while (parent && this.modalRoot && parent != this.modalRoot.nativeElement && parent != document) {
       // 取当前节点的父节点继续寻找
       parent = parent.parentNode;
     }
@@ -67,25 +142,7 @@ export class PopupComponent implements OnInit, AfterViewInit {
     // 找到最顶层，则表示已经不在宿主元素内部了，触发失去焦点 fn
     if (parent == document) {
       console.log('out click');
-      this.show = false;
+      this.isOpened = false;
     }
-  }
-
-  static open() {
-
-  }
-
-  close() {
-    this.show = false;
-  }
-
-  _handleCancel() {
-    console.log('取消操作');
-    this.close();
-  }
-
-  _handlePrimary() {
-    console.log('确认操作');
-    this.close();
   }
 }

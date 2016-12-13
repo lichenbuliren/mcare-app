@@ -1,18 +1,21 @@
 <!-- 弹层 S -->
-<div *ngIf="show" class="modal" role="popup-dialog">
-  <div class="modal-dialog" #modalDialog>
-    <div class="modal-content">
+<div class="modal" role="popup-dialog" #modalRoot>
+  <div [class]="'modal-dialog ' + clazz" #modalDialog (click)="preventClosing($event)">
+    <div class="modal-content" tabindex="0" *ngIf="isOpened">
       <div class="modal-header">
-        <div class="row-control">
-          <h4 class="title">{{title}}</h4>
+        <div class="row-control" *ngIf="title">
+          <h4 class="title" >{{title}}</h4>
         </div>
+        <ng-content select="[modal-header]"></ng-content>
       </div>
       <div class="modal-body">
-        <div #modalBody></div>
+        <ng-content select="[modal-content]"></ng-content>
       </div>
       <div class="modal-footer">
-        <button *ngIf="buttons.cancel" (click)="_handleCancel()" class="button cancel" [class.full-fill]="btnLen == 1" #cancel>{{buttons.cancel}}</button>
-        <button *ngIf="buttons.primary" (click)="_handlePrimary()" class="button primary" [class.full-fill]="btnLen == 1" #primary>{{buttons.primary}}</button>
+        <ng-content select="[modal-footer]"></ng-content>
+        <button *ngIf="cancelButtonLabel" (click)="close()" class="button cancel" [class.full-fill]="
+        !submitButtonLabel" #cancel>{{cancelButtonLabel}}</button>
+        <button *ngIf="submitButtonLabel" (click)="submit()" class="button primary" [class.full-fill]="!cancelButtonLabel" #primary>{{submitButtonLabel}}</button>
       </div>
     </div>
   </div>

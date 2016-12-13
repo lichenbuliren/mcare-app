@@ -1,4 +1,23 @@
 <div class="container">
   <app-verify-form (submit)="onSubmit($event)"></app-verify-form>
+   <app-popup #popup
+    title="自定义弹窗"
+    cancelButtonLabel="取消"
+    submitButtonLabel="确定"
+    clazz="other-class"
+    [closeOnEscape]="true"
+    [closeOnOutsideClick]="true"
+    (onOpen)="activeOnOpen()"
+    (onClose)="actionOnClose()"
+    (onSubmit)="actionOnSubmit()">
+
+    <div modal-content>
+      hello world!
+    </div>
+
+    <div modal-footer>
+      <button class="btn btn-primary" (click)="popup.close()">close</button>
+    </div>
+  </app-popup>
 </div>
-<app-popup></app-popup>
+
