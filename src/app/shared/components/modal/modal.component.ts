@@ -20,6 +20,10 @@ import {
   selector: 'modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
+  host: {
+    '(document:keyup)': 'keyup($event)',
+    '(document:click)': 'handOutSideClick($event)'
+  },
   encapsulation: ViewEncapsulation.None,
 })
 export class ModalComponent implements OnInit, AfterViewInit {
@@ -27,22 +31,11 @@ export class ModalComponent implements OnInit, AfterViewInit {
   // =======================
   // 输入属性
   // =======================
-  private _isOpened = false;
-
-  @Input()
-  set isOpened(value) {
-    this._isOpened = value;
-    this.isOpenedChange.emit(value);
-  }
-  get isOpened() {
-    return this._isOpened;
-  }
+  @Input() isOpened: boolean
 
   @Input() clazz: string;
 
   @Input() closeOnEscape: boolean = true;
-
-  @Input() closeOnOutsideClick: boolean = true;
 
   @Input() title: string = '标题';
 
@@ -94,20 +87,20 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
 
   open(...args: any[]) {
-    if (this._isOpened) return;
+    if (this.isOpened) return;
 
-    this._isOpened = true;
-    // this.isOpenedChange.emit(true);
+    this.isOpened = true;
+    this.isOpenedChange.emit(true);
     this.onOpen.emit(args);
 
     // TODO 这里可以动态插入其它组件
   }
 
   close(...args: any[]) {
-    if (!this._isOpened) return;
+    if (!this.isOpened) return;
 
-    this._isOpened = false;
-    // this.isOpenedChange.emit(false);
+    this.isOpened = false;
+    this.isOpenedChange.emit(false);
     this.onClose.emit(args);
   }
 
@@ -124,9 +117,14 @@ export class ModalComponent implements OnInit, AfterViewInit {
     event.stopPropagation();
   }
 
+  keyup(event: KeyboardEvent) {
+    if (event.keyCode === 27) {
+      this.close();
+    }
+  }
+
   // 点击弹层主区域之外，关闭弹层
-  @HostListener('window:click', ['$event'])
-  handleClose(event) {
+  handOutSideClick(event) {
     var parent = event.target;
     // 如何当前节点不是宿主节点，并且不等于 document 节点
     while (parent && this.modalRoot && parent != this.modalRoot.nativeElement && parent != document) {
@@ -136,7 +134,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
     // 找到最顶层，则表示已经不在宿主元素内部了，触发失去焦点 fn
     if (parent == document) {
-      this._isOpened = false;
+      this.close();
     }
   }
 }
