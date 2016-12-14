@@ -13,7 +13,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1050;
+  z-index: 9998;
   overflow: hidden;
   outline: 0;
   background-color: rgba(0, 0, 0, .2);
@@ -25,6 +25,7 @@
   top: 50%;
   left: 50%;
   width: 100%;
+  z-index: 9999;
   padding: 0 px2rem(54);
   color: #262626;
   font-size: px2rem(36);
@@ -42,6 +43,7 @@
     left: 0;
     width: 100%;
     box-sizing: border-box;
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
     padding: 0 px2rem(54);
     overflow: hidden;
     z-index: 999;

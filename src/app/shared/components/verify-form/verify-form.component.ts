@@ -34,7 +34,10 @@ export class VerifyFormComponent implements OnInit {
     if (localStorage.getItem(Config.RepairBaseInfoKey)) {
       this.localData = JSON.parse(localStorage.getItem(Config.RepairBaseInfoKey));
     } else {
-      this.localData = {};
+      this.localData = {
+        username: '张三',
+        mobile: '13602532846'
+      };
     }
     this.initForm();
   }

@@ -22,13 +22,21 @@ import {
   styleUrls: ['./modal.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, AfterViewInit {
 
   // =======================
   // 输入属性
   // =======================
+  private _isOpened = false;
 
-  @Input() isOpened = false;
+  @Input()
+  set isOpened(value) {
+    this._isOpened = value;
+    this.isOpenedChange.emit(value);
+  }
+  get isOpened() {
+    return this._isOpened;
+  }
 
   @Input() clazz: string;
 
@@ -36,7 +44,7 @@ export class ModalComponent implements OnInit {
 
   @Input() closeOnOutsideClick: boolean = true;
 
-  @Input() title: string;
+  @Input() title: string = '标题';
 
   @Input() cancelButtonLabel: string;
 
@@ -69,43 +77,38 @@ export class ModalComponent implements OnInit {
   @ViewChild('modalBody', {read: ViewContainerRef}) dynamicTarget: ViewContainerRef;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {
-    this.createBackDrop();
+
   }
 
   ngOnDestroy() {
-    if (this.backdropElement && this.backdropElement.parentNode === document.body) document.body.removeChild(this.backdropElement);
-
   }
 
   ngOnInit() {
   }
 
-  // ngAfterViewInit() {
-  //   let self = this;
-  //   let factory = this.componentFactoryResolver.resolveComponentFactory(InputControlComponent);
-  //   this.componentRef = this.dynamicTarget.createComponent(factory);
-  // }
+
+  ngAfterViewInit() {
+    // let factory = this.componentFactoryResolver.resolveComponentFactory();
+    // this.componentRef = this.dynamicTarget.createComponent(factory);
+  }
 
 
   open(...args: any[]) {
-    if (this.isOpened) return;
+    if (this._isOpened) return;
 
-    this.isOpened = true;
-    this.isOpenedChange.emit(true);
+    this._isOpened = true;
+    // this.isOpenedChange.emit(true);
     this.onOpen.emit(args);
 
     // TODO 这里可以动态插入其它组件
-     document.body.appendChild(this.backdropElement);
-     window.setTimeout(() => this.modalRoot.nativeElement.focus(), 0);
   }
 
   close(...args: any[]) {
-    if (!this.isOpened) return;
+    if (!this._isOpened) return;
 
-    this.isOpened = false;
-    this.isOpenedChange.emit(false);
+    this._isOpened = false;
+    // this.isOpenedChange.emit(false);
     this.onClose.emit(args);
-    document.body.removeChild(this.backdropElement);
   }
 
   submit() {
@@ -121,14 +124,6 @@ export class ModalComponent implements OnInit {
     event.stopPropagation();
   }
 
-  // 动态创建蒙层
-  private createBackDrop() {
-    this.backdropElement = document.createElement('div');
-    this.backdropElement.classList.add('modal-mask');
-    this.backdropElement.classList.add('fade');
-    this.backdropElement.classList.add('in');
-  }
-
   // 点击弹层主区域之外，关闭弹层
   @HostListener('window:click', ['$event'])
   handleClose(event) {
@@ -141,7 +136,7 @@ export class ModalComponent implements OnInit {
 
     // 找到最顶层，则表示已经不在宿主元素内部了，触发失去焦点 fn
     if (parent == document) {
-      this.isOpened = false;
+      this._isOpened = false;
     }
   }
 }

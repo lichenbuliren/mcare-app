@@ -29,11 +29,13 @@ export class DeliveryVerifyComponent implements OnInit {
 
   }
 
-  activeOnOpen() {
+  actionOnSubmit() {
+    this.dialogShow = true;
     console.log('弹层打开');
   }
 
-  activeOnClose() {
+  actionOnClose() {
+    this.dialogShow = false;
     console.log('弹层关闭');
   }
 
