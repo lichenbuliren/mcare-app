@@ -1,6 +1,6 @@
 @charset 'UTF-8';
-@import "../../../../assets/global/_function";
-@import "../../../../assets/global/_mixin";
+@import "../../../assets/global/_function";
+@import "../../../assets/global/_mixin";
 
 .no-scroll {
   height: 100%;
@@ -58,13 +58,13 @@
       overflow: hidden;
       @include font-dpr(18px);
       text-align: center;
-      padding: px2rem(80) 0;
+      padding: px2rem(60) 0;
     }
 
   }
 
   .modal-body {
-    padding: px2rem(216) px2rem(36) px2rem(140);
+    padding: px2rem(220) px2rem(36) px2rem(160);
     line-height: 1.6;
     max-height: px2rem(1280);
     overflow: hidden;
@@ -74,14 +74,11 @@
 
   .modal-footer {
     width: 100%;
-    height: px2rem(140);
-    line-height: px2rem(140);
     vertical-align: middle;
     overflow: hidden;
     position: absolute;
     bottom: 0;
     box-sizing: border-box;
-    text-align: center;
     @include font-dpr(16px);
     z-index: 999;
     border-top: 1px solid rgba(0, 0, 0, .05);
@@ -89,8 +86,9 @@
     .button {
       float: left;
       width: 50%;
-      height: 100%;
+      text-align: center;
       box-sizing: border-box;
+      padding: px2rem(36) 0;
       @include font-dpr(16px);
       background-color: #fff;
       border-right: 1px solid rgba(0, 0, 0, .05);

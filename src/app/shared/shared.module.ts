@@ -7,7 +7,7 @@ import { InputControlComponent } from './components/input-control/input-control.
 import { CountdownComponent } from './components/countdown/countdown.component';
 import { VerifyFormComponent } from './components/verify-form/verify-form.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { ModalComponent } from './components/modal/modal.component';
+import { ModalComponent, ModalService } from './modal/index';
 
 @NgModule({
   imports: [
@@ -34,6 +34,7 @@ import { ModalComponent } from './components/modal/modal.component';
     NavbarComponent,
     ModalComponent
   ],
+  providers: [ModalService],
   entryComponents: [InputControlComponent]
 })
 export class SharedModule {

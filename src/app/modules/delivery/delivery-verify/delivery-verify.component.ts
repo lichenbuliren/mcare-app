@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-// import { PopupComponent } from '../../../shared/components/popup/popup.component';
+import { ModalService } from '../../../shared/modal';
 
 @Component({
   selector: 'delivery-verify',
@@ -18,28 +18,35 @@ export class DeliveryVerifyComponent implements OnInit {
   mobile: AbstractControl;
   captcha: AbstractControl;
 
-  dialogShow: boolean = false;
+  modalId: string;
+
 
   constructor(
+    private modalService: ModalService,
     private router: Router,
     private activateRoute: ActivatedRoute) {
+    this.modalId = +new Date() + '';
   }
 
   ngOnInit() {
 
   }
 
-  actionOnSubmit() {
-    console.log('弹层打开');
+  actionOnOpen() {
+    console.log('弹层开启');
   }
 
-  actionOnClose() {
-    console.log('弹层关闭');
+  actionOnConfirm($event) {
+    console.log('弹层确定回调', $event);
+  }
+
+  actionOnCancel() {
+    console.log('弹层取消回调');
   }
 
   onSubmit() {
     // this.router.navigate(['../submit'], { relativeTo: this.activateRoute});
-    this.dialogShow = true;
+    this.modalService.open(this.modalId);
     console.log('提交表单');
   }
 }

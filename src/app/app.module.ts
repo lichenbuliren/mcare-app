@@ -12,10 +12,11 @@ import { ValidatorsService } from './services/';
 import { ServiceSupportService } from './core/service-support.service';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent
+    IndexComponent,
   ],
   imports: [
     BrowserModule,

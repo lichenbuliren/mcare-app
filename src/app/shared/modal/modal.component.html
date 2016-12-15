@@ -5,18 +5,15 @@
     <div [class]="'modal-dialog ' + clazz" #modalDialog (click)="preventClosing($event)">
       <div class="modal-content" tabindex="0">
         <div class="modal-header">
-          <div class="row-control">
-            <h4 class="title">{{title}}</h4>
-          </div>
+          <ng-content select="[modal-header]"></ng-content>
         </div>
         <div class="modal-body">
           <ng-content select="[modal-content]"></ng-content>
         </div>
         <div class="modal-footer">
-          <button *ngIf="cancelButtonLabel.length > 0" (click)="close()" class="button cancel" [class.full-fill]="
-        !submitButtonLabel" #cancel>{{cancelButtonLabel}}</button>
-          <button *ngIf="submitButtonLabel.length > 0" (click)="submit()" class="button primary" [class.full-fill]="!cancelButtonLabel"
-            #primary>{{submitButtonLabel}}</button>
+          <button *ngIf="cancelButtonLabel.length > 0" (click)="cancel()" class="button cancel" #cancelButton [class.full-fill]="
+        !confirmButtonLabel">{{cancelButtonLabel}}</button>
+          <button *ngIf="confirmButtonLabel.length > 0" (click)="confirm()" class="button primary" #confirmButton [class.full-fill]="!cancelButtonLabel">{{confirmButtonLabel}}</button>
         </div>
       </div>
     </div>

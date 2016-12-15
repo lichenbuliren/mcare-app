@@ -14,10 +14,10 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-// import { InputControlComponent } from '../input-control/input-control.component';
+import { ModalService } from './modal.service';
 
 @Component({
-  selector: 'modal',
+  selector: 'mcare-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
   host: {
@@ -31,7 +31,9 @@ export class ModalComponent implements OnInit, AfterViewInit {
   // =======================
   // 输入属性
   // =======================
-  @Input() isOpened: boolean
+  @Input() modalId: string = +new Date() + '';
+
+  @Input() isOpened: boolean = false;
 
   @Input() clazz: string;
 
@@ -39,19 +41,19 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
   @Input() title: string = '标题';
 
-  @Input() cancelButtonLabel: string;
+  @Input() cancelButtonLabel: string = '取消';
 
-  @Input() submitButtonLabel: string;
+  @Input() confirmButtonLabel: string = '确定';
 
   // =======================
   // 输出属性
   // =======================
 
-  @Output() onOpen = new EventEmitter(false);
+  @Output() onOpen: EventEmitter<any> = new EventEmitter(false);
 
-  @Output() onClose = new EventEmitter(false);
+  @Output() onCancel: EventEmitter<any> = new EventEmitter();
 
-  @Output() onSubmit = new EventEmitter(false);
+  @Output() onConfirm: EventEmitter<any> = new EventEmitter(false);
 
   @Output() isOpenedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -64,27 +66,32 @@ export class ModalComponent implements OnInit, AfterViewInit {
   // =======================
   // 私有属性
   // =======================
-  private backdropElement: HTMLElement;
-
   componentRef: ComponentRef<Component>
+
   @ViewChild('modalBody', {read: ViewContainerRef}) dynamicTarget: ViewContainerRef;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(
+    private modalService: ModalService,
+    private componentFactoryResolver: ComponentFactoryResolver) {
 
+  }
+
+  ngOnInit() {
+    this.modalService.registerModal(this);
   }
 
   ngOnDestroy() {
   }
-
-  ngOnInit() {
-  }
-
 
   ngAfterViewInit() {
     // let factory = this.componentFactoryResolver.resolveComponentFactory();
     // this.componentRef = this.dynamicTarget.createComponent(factory);
   }
 
+  cancel() {
+    this.onCancel.emit();
+    this.close();
+  }
 
   open(...args: any[]) {
     if (this.isOpened) return;
@@ -96,16 +103,12 @@ export class ModalComponent implements OnInit, AfterViewInit {
     // TODO 这里可以动态插入其它组件
   }
 
-  close(...args: any[]) {
-    if (!this.isOpened) return;
-
-    this.isOpened = false;
-    this.isOpenedChange.emit(false);
-    this.onClose.emit(args);
+  private close(...args: any[]) {
+    this.modalService.close(this.modalId);
   }
 
-  submit() {
-    this.onSubmit.emit({
+  confirm() {
+    this.onConfirm.emit({
       province: '广东',
       city: '深圳'
     });
@@ -113,12 +116,12 @@ export class ModalComponent implements OnInit, AfterViewInit {
     this.close();
   }
 
-  public preventClosing(event: MouseEvent) {
+  preventClosing(event: MouseEvent) {
     event.stopPropagation();
   }
 
   keyup(event: KeyboardEvent) {
-    if (event.keyCode === 27) {
+    if (event.keyCode === 27 && this.closeOnEscape) {
       this.close();
     }
   }

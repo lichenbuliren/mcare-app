@@ -1,19 +1,22 @@
 <div class="container">
   <app-verify-form (submit)="onSubmit($event)"></app-verify-form>
-   <modal #modal
-    title="自定义弹窗"
-    cancelButtonLabel="取消"
-    submitButtonLabel="确定"
-    clazz="other-class"
-    [closeOnEscape]="true"
-    (onOpen)="activeOnOpen()"
-    (onClose)="actionOnClose()"
-    (onSubmit)="actionOnSubmit()"
-    [(isOpened)]="dialogShow">
+  <mcare-modal #mcareModal
+  title="自定义弹窗"
+  cancelButtonLabel="取消"
+  confirmButtonLabel="确定"
+  clazz="other-class"
+  (onOpen)="actionOnOpen()"
+  (onCancel)="actionOnCancel()"
+  (onConfirm)="actionOnConfirm($event)"
+  [modalId]="modalId">
+    <div modal-header>
+      <div class="row-control">
+        <h4 class="title">自定义弹层</h4>
+      </div>
+    </div>
 
     <div modal-content>
-      hello world!
+      这是自定义弹层内容，呵呵哒
     </div>
-  </modal>
+  </mcare-modal>
 </div>
-

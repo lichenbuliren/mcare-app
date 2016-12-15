@@ -1,9 +1,9 @@
-import {NgModule}     from '@angular/core';
-import {RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import {HomeComponent} from "./home.component";
-import {HomeVerifyComponent} from "./home-verify/home-verify.component";
-import {HomeSubmitComponent} from "./home-submit/home-submit.component";
+import { HomeComponent } from "./home.component";
+import { HomeVerifyComponent } from "./home-verify/home-verify.component";
+import { HomeSubmitComponent } from "./home-submit/home-submit.component";
 
 @NgModule({
   imports: [
@@ -11,10 +11,12 @@ import {HomeSubmitComponent} from "./home-submit/home-submit.component";
       {
         path: 'home',
         component: HomeComponent,
+        data: { title: '上门快修' },
         children: [
-          {path: '', component: HomeVerifyComponent},
-          {path: 'verify', component: HomeVerifyComponent},
-          {path: 'submit', component: HomeSubmitComponent}
+          { path: 'verify', component: HomeVerifyComponent },
+          { path: 'submit', component: HomeSubmitComponent },
+          { path: '', redirectTo: 'verify' },
+          { path: '**', redirectTo: 'verify' }
         ]
       }
     ])
