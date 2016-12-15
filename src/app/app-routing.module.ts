@@ -6,11 +6,12 @@ import { IndexComponent } from "./index/index.component";
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: '', component: IndexComponent, data: { title: '我要维修' } },
-      { path: 'delivery', loadChildren: 'app/modules/delivery.module#DeliveryModule'},
-      { path: 'home', loadChildren: 'app/modules/home.module#HomeModule'},
-      { path: 'order', loadChildren: 'app/modules/order.module#OrderModule'},
-      { path: '**', redirectTo: '' }
+      { path: '', redirectTo: 'index', pathMatch: 'full' },
+      { path: 'index', component: IndexComponent, data: { title: '我要维修' } },
+      { path: 'delivery', loadChildren: 'app/modules/delivery/delivery.module#DeliveryModule'},
+      { path: 'home', loadChildren: 'app/modules/home/home.module#HomeModule'},
+      { path: 'order', loadChildren: 'app/modules/home/order.module#OrderModule'},
+      { path: '**', redirectTo: 'index' }
     ])
   ],
   exports: [
