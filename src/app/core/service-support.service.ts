@@ -19,10 +19,10 @@ export class ServiceSupportService {
   constructor(private _jsonp: Jsonp, private http: Http) {}
 
   // 设置公共请求参数
-  generateSearchParam({jsonp: boolean}): URLSearchParams {
+  generateSearchParam(query?: {jsonp: boolean}): URLSearchParams {
     let search = new URLSearchParams();
     // 统一 jsonp 请求参数
-    if (Jsonp) search.set('callback', 'JSONP_CALLBACK');
+    if (query.jsonp) search.set('callback', 'JSONP_CALLBACK');
     return search;
   }
 
