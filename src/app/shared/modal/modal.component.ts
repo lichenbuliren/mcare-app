@@ -28,12 +28,12 @@ import { ModalService } from './modal.service';
 })
 export class ModalComponent implements OnInit, AfterViewInit {
 
+  isOpened: boolean = false;
+
   // =======================
   // 输入属性
   // =======================
   @Input() modalId: string = +new Date() + '';
-
-  @Input() isOpened: boolean = false;
 
   @Input() clazz: string;
 
@@ -49,13 +49,9 @@ export class ModalComponent implements OnInit, AfterViewInit {
   // 输出属性
   // =======================
 
-  @Output() onOpen: EventEmitter<any> = new EventEmitter(false);
-
   @Output() onCancel: EventEmitter<any> = new EventEmitter();
 
   @Output() onConfirm: EventEmitter<any> = new EventEmitter(false);
-
-  @Output() isOpenedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   // =======================
   // 公共属性
@@ -73,7 +69,6 @@ export class ModalComponent implements OnInit, AfterViewInit {
   constructor(
     private modalService: ModalService,
     private componentFactoryResolver: ComponentFactoryResolver) {
-
   }
 
   ngOnInit() {
@@ -91,16 +86,6 @@ export class ModalComponent implements OnInit, AfterViewInit {
   cancel() {
     this.onCancel.emit();
     this.close();
-  }
-
-  open(...args: any[]) {
-    if (this.isOpened) return;
-
-    this.isOpened = true;
-    this.isOpenedChange.emit(true);
-    this.onOpen.emit(args);
-
-    // TODO 这里可以动态插入其它组件
   }
 
   private close(...args: any[]) {

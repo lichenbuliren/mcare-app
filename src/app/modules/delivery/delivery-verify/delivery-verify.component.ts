@@ -32,10 +32,6 @@ export class DeliveryVerifyComponent implements OnInit {
 
   }
 
-  actionOnOpen() {
-    console.log('弹层开启');
-  }
-
   actionOnConfirm($event) {
     console.log('弹层确定回调', $event);
   }
