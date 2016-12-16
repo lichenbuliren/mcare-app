@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 import { ServiceSupportService } from '../../../core/service-support.service';
-import { Config } from '../../../core/config';
 
 @Component({
   selector: 'delivery-device',
@@ -22,8 +21,8 @@ export class DeliverySubmitComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem(Config.DeliveryDataKey)) {
-      this.localData = JSON.parse(localStorage.getItem(Config.DeliveryDataKey));
+    if (localStorage.getItem('DeliveryDataKey')) {
+      this.localData = JSON.parse(localStorage.getItem('DeliveryDataKey'));
     } else {
       this.localData = {};
     }

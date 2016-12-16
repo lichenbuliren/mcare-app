@@ -6,7 +6,6 @@ import { HighlightDirective } from './directives/';
 import { InputControlComponent } from './components/input-control/input-control.component';
 import { CountdownComponent } from './components/countdown/countdown.component';
 import { VerifyFormComponent } from './components/verify-form/verify-form.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { ModalComponent, ModalService } from './modal/index';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { ModalComponent, ModalService } from './modal/index';
     InputControlComponent,
     CountdownComponent,
     VerifyFormComponent,
-    NavbarComponent,
     ModalComponent
   ],
   exports: [
@@ -31,7 +29,6 @@ import { ModalComponent, ModalService } from './modal/index';
     InputControlComponent,
     CountdownComponent,
     VerifyFormComponent,
-    NavbarComponent,
     ModalComponent
   ],
   providers: [ModalService],

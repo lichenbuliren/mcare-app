@@ -9,13 +9,13 @@ import { HomeSubmitComponent } from "./home-submit/home-submit.component";
   imports: [
     RouterModule.forChild([
       {
-        path: 'home',
+        path: '',
         component: HomeComponent,
         data: { title: '上门快修' },
         children: [
           { path: 'verify', component: HomeVerifyComponent },
           { path: 'submit', component: HomeSubmitComponent },
-          { path: '', redirectTo: 'verify' },
+          { path: '', redirectTo: 'verify', pathMatch: 'full' },
           { path: '**', redirectTo: 'verify' }
         ]
       }

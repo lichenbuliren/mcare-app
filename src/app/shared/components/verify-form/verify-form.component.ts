@@ -3,7 +3,6 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/fo
 
 import { ServiceSupportService } from '../../../core/service-support.service';
 import { ValidatorsService } from '../../../services/validators.service';
-import { Config } from '../../../core/config';
 
 @Component({
   selector: 'app-verify-form',
@@ -31,8 +30,8 @@ export class VerifyFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem(Config.RepairBaseInfoKey)) {
-      this.localData = JSON.parse(localStorage.getItem(Config.RepairBaseInfoKey));
+    if (localStorage.getItem('RepairBaseInfoKey')) {
+      this.localData = JSON.parse(localStorage.getItem('RepairBaseInfoKey'));
     } else {
       this.localData = {
         username: '张三',
@@ -70,7 +69,7 @@ export class VerifyFormComponent implements OnInit {
     }).subscribe(success => {
       if (success) {
         // 保存本地数据
-        window.localStorage.setItem(Config.RepairBaseInfoKey, JSON.stringify({
+        window.localStorage.setItem('RepairBaseInfoKey', JSON.stringify({
           username: this.username.value,
           mobile: this.mobile.value,
           captcha: this.captcha.value

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {CanActivate} from "@angular/router";
+import { CanActivate } from "@angular/router";
 
 @Injectable()
 export class OrderService implements CanActivate {
