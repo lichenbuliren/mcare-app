@@ -6,7 +6,7 @@ import { HighlightDirective } from './directives/';
 import { InputControlComponent } from './components/input-control/input-control.component';
 import { CountdownComponent } from './components/countdown/countdown.component';
 import { VerifyFormComponent } from './components/verify-form/verify-form.component';
-import { ModalComponent, ModalService } from './modal/index';
+import { ModalComponent, ModalService } from './modal/';
 
 @NgModule({
   imports: [
