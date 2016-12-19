@@ -20,7 +20,6 @@ export class DeliveryVerifyComponent implements OnInit {
 
   modalId: string;
 
-
   constructor(
     private modalService: ModalService,
     private router: Router,

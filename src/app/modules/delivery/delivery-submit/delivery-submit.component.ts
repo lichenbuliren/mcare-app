@@ -12,6 +12,8 @@ export class DeliverySubmitComponent implements OnInit {
   formActive: boolean = true;
   deliveryFormGroup: FormGroup;
   sn: AbstractControl;
+  serviceType: AbstractControl;
+  faultType: AbstractControl;
 
   localData: any;
 
@@ -27,10 +29,30 @@ export class DeliverySubmitComponent implements OnInit {
       this.localData = {};
     }
     this.deliveryFormGroup = this.formBuilder.group({
-      'sn': [this.localData.sn, Validators.required]
+      'sn': [this.localData.sn, Validators.required],
+      'serviceType': ['维修', Validators.required],
+      'faultType': ['进水', Validators.required]
     });
 
     this.sn = this.deliveryFormGroup.controls['sn'];
+    this.serviceType = this.deliveryFormGroup.controls['serviceType'];
+    this.faultType = this.deliveryFormGroup.controls['faultType'];
   }
+
+  _handleSelectClick(type) {
+    switch (type) {
+      case 'serviceType':
+        // TODO 动态加载服务类型组件
+        break;
+      case 'faultType':
+        // TODO 动态加载故障类型组件
+        break;
+      case 'send-address':
+        // TODO 动态加载地址组件
+      default:
+        break;
+    }
+  }
+
 
 }

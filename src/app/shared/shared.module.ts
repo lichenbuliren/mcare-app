@@ -31,7 +31,8 @@ import { SelectControlComponent } from './components/select-control/select-contr
     InputControlComponent,
     CountdownComponent,
     VerifyFormComponent,
-    ModalComponent
+    ModalComponent,
+    SelectControlComponent
   ],
   providers: [ModalService],
   entryComponents: [InputControlComponent]

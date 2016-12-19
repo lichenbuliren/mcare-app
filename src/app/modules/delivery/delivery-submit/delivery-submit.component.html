@@ -8,39 +8,8 @@
         </input-control>
       </div>
       <div class="row-control">
-        <div class="label-control select-control service-type" data-target="serviceType">
-          <i class="icon icon-arrow"></i>
-          <label class="label label-title" role="service-type">服务类型</label>
-          <label class="label result"></label>
-          <!-- 服务类型 S -->
-          <script type="text/template" id="serviceType">
-              <div class="row-control service-list" single-select>
-                {{each data}}
-                <div class="label-control" data-code="{{$index}}">
-                  <label class="label">{{$value}}</label>
-                </div>
-                {{/each}}
-              </div>
-            </script>
-          <!-- 服务类型 E -->
-        </div>
-        <div class="label-control select-control fault" data-target="fault">
-          <i class="icon icon-arrow"></i>
-          <label class="label label-title">故障类型</label>
-          <label class="label result"></label>
-          <!-- 故障类型 S -->
-          <script type="text/template" id="fault">
-              <div class="row-control fault-list" multi-select>
-                {{each data}}
-                <div class="label-control"><label class="label">{{$value}}</label></div>
-                {{/each}}
-                <div class="input-control">
-                  <input type="text" name="fault-remark" placeholder="输入其它原因">
-                </div>
-              </div>
-            </script>
-          <!-- 故障类型 E -->
-        </div>
+        <select-control name="serviceType" label="服务类型" [result]="serviceType.value" (click)="_handleSelectClick('serviceType')"></select-control>
+        <select-control name="faultType" label="故障类型" [result]="faultType.value" (click)="_handleSelectClick('faultType')"></select-control>
       </div>
       <div class="row-control">
         <div class="input-control is-take-control">
@@ -51,17 +20,9 @@
         <p class="remark">保内服务免运费，保外服务每单运费40元</p>
       </div>
       <div class="row-control">
-        <div class="label-control select-control send-address" data-target="send-address">
-          <i class="icon icon-arrow"></i>
-          <label class="label label-title">用户所在地</label>
-          <label class="label result"></label>
-        </div>
-        <div class="label-control select-control rec-address" data-target="rec-address">
-          <i class="icon icon-arrow"></i>
-          <label class="label label-title">回寄地址</label>
-          <label class="label result"></label>
-        </div>
-        <div class="label-control protocol">
+        <select-control name="send-address" label="用户所在地" [result]="" (click)="_handleSelectClick('send-address')"></select-control>
+        <select-control name="rec-address" label="回寄地址" [result]="" (click)="_handleSelectClick('rec-address')"></select-control>
+        <div class="select-control protocol">
           <i class="icon icon-radio"></i>
           <div class="label">我已阅读以下并同意对寄修可能产生的费用进行支付。<br><a href="http://mcare.meizu.com/policy.html">《魅族手机售后服务政策》</a>及<a href="http://mcare.meizu.com/price-list.html">《保外服务报价清单》</a>
           </div>
