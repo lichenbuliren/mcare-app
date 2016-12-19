@@ -30,7 +30,8 @@ const noop = () => {
     // 宿主元素 click 事件，触发 focus() 事件
     '(click)': 'focus()',
     // 切换宿主元素 focus 样式
-    '[class.focus]': 'focused'
+    '[class.focus]': 'focused',
+    'class': 'input-control'
   },
   encapsulation: ViewEncapsulation.None,
   providers: [INPUT_CONTROL_VALUE_ACCESSOR]

@@ -2,7 +2,7 @@
   <div class="content">
     <form class="form">
       <div class="row-control">
-        <input-control class="input-control" [class.error]="!sn.valid && sn.touched" type="text" name="sn" placeholder="手机 SN 码"
+        <input-control [class.error]="!sn.valid && sn.touched" type="text" name="sn" placeholder="手机 SN 码"
           [formControl]="sn">
           <p *ngIf="!sn.valid && sn.touched" class="error-tips">请输入手机号 SN 码</p>
         </input-control>

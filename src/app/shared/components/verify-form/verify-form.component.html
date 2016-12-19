@@ -1,6 +1,6 @@
 <form *ngIf="formActive" class="form" [formGroup]="verifyFormGroup" (ngSubmit)="onSubmit($event)">
   <div class="row-control">
-    <input-control class="input-control"
+    <input-control
       [class.error]="!username.valid && username.touched"
       type="text"
       name="username"
@@ -8,7 +8,7 @@
       [formControl]="username">
       <p *ngIf="!username.valid && username.touched" class="error-tips">请输入您的姓名</p>
     </input-control>
-    <input-control #phone class="input-control"
+    <input-control #phone
       [class.error]="!mobile.valid && mobile.touched"
       type="tel"
       name="mobile"
