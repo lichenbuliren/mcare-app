@@ -8,6 +8,7 @@ import { CountdownComponent } from './components/countdown/countdown.component';
 import { VerifyFormComponent } from './components/verify-form/verify-form.component';
 import { ModalComponent, ModalService } from './modal/';
 import { SelectControlComponent } from './components/select-control/select-control.component';
+import { SelectListComponent } from './components/select-list/select-list.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { SelectControlComponent } from './components/select-control/select-contr
     CountdownComponent,
     VerifyFormComponent,
     ModalComponent,
-    SelectControlComponent
+    SelectControlComponent,
+    SelectListComponent
   ],
   exports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { SelectControlComponent } from './components/select-control/select-contr
     CountdownComponent,
     VerifyFormComponent,
     ModalComponent,
-    SelectControlComponent
+    SelectControlComponent,
+    SelectListComponent
   ],
   providers: [ModalService],
   entryComponents: [InputControlComponent]

@@ -1,12 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 import { ServiceSupportService } from '../../../core/service-support.service';
+import { ModalService, ModalComponent } from '../../../shared/modal/';
 
 @Component({
   selector: 'delivery-device',
   templateUrl: 'delivery-submit.component.html',
-  styleUrls: ['delivery-submit.component.scss']
+  styleUrls: ['delivery-submit.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DeliverySubmitComponent implements OnInit {
   formActive: boolean = true;
@@ -16,13 +18,18 @@ export class DeliverySubmitComponent implements OnInit {
   faultType: AbstractControl;
 
   localData: any;
+  modalTitle: string;
+  modalId: string;
 
   constructor(
     private formBuilder: FormBuilder,
-    private serviceSupport: ServiceSupportService) {
+    private serviceSupport: ServiceSupportService,
+    private modalService: ModalService) {
+    this.modalId = +new Date() + '';
   }
 
   ngOnInit() {
+    console.log('this.modalId: ', this.modalId);
     if (localStorage.getItem('DeliveryDataKey')) {
       this.localData = JSON.parse(localStorage.getItem('DeliveryDataKey'));
     } else {
@@ -39,20 +46,26 @@ export class DeliverySubmitComponent implements OnInit {
     this.faultType = this.deliveryFormGroup.controls['faultType'];
   }
 
-  _handleSelectClick(type) {
+  _handleSelectClick(event, type) {
+    event.stopPropagation();
     switch (type) {
       case 'serviceType':
+        this.modalTitle = '请选择维修类型';
+        console.log('service type click');
         // TODO 动态加载服务类型组件
+        this.modalService.open(this.modalId);
         break;
       case 'faultType':
         // TODO 动态加载故障类型组件
         break;
       case 'send-address':
-        // TODO 动态加载地址组件
+      // TODO 动态加载地址组件
       default:
         break;
     }
   }
 
+  actionOnConfirm() {
 
+  }
 }

@@ -2,13 +2,12 @@
   <div class="content">
     <form class="form">
       <div class="row-control">
-        <input-control [class.error]="!sn.valid && sn.touched" type="text" name="sn" placeholder="手机 SN 码"
-          [formControl]="sn">
+        <input-control [class.error]="!sn.valid && sn.touched" type="text" name="sn" placeholder="手机 SN 码" [formControl]="sn">
           <p *ngIf="!sn.valid && sn.touched" class="error-tips">请输入手机号 SN 码</p>
         </input-control>
       </div>
       <div class="row-control">
-        <select-control name="serviceType" label="服务类型" [result]="serviceType.value" (click)="_handleSelectClick('serviceType')"></select-control>
+        <select-control name="serviceType" label="服务类型" [result]="serviceType.value" (click)="_handleSelectClick($event, 'serviceType')"></select-control>
         <select-control name="faultType" label="故障类型" [result]="faultType.value" (click)="_handleSelectClick('faultType')"></select-control>
       </div>
       <div class="row-control">
@@ -33,5 +32,20 @@
       </div>
     </form>
   </div>
-</div>
+  <mcare-modal #mcareModal
+    title="自定义弹窗"
+    cancelButtonLabel="取消"
+    confirmButtonLabel="确定"
+    (onConfirm)="actionOnConfirm($event)"
+    [modalId]="modalId">
+    <div modal-header>
+      <div class="row-control">
+        <h4 class="title">{{modalTitle}}</h4>
+      </div>
+    </div>
+    <div modal-content>
+      这是自定义弹窗内容
+    </div>
+  </mcare-modal>
 
+</div>

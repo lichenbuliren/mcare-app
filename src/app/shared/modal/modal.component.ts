@@ -33,7 +33,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
   // =======================
   // 输入属性
   // =======================
-  @Input() modalId: string = +new Date() + '';
+  @Input() modalId: string;
 
   @Input() clazz: string;
 
@@ -73,6 +73,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.modalService.registerModal(this);
+    console.log('modalComonent modalId:', this.modalId);
   }
 
   ngOnDestroy() {
