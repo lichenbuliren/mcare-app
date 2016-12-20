@@ -30,18 +30,4 @@ export class DeliveryVerifyComponent implements OnInit {
   ngOnInit() {
 
   }
-
-  actionOnConfirm($event) {
-    console.log('弹层确定回调', $event);
-  }
-
-  actionOnCancel() {
-    console.log('弹层取消回调');
-  }
-
-  onSubmit() {
-    // this.router.navigate(['../submit'], { relativeTo: this.activateRoute});
-    this.modalService.open(this.modalId);
-    console.log('提交表单');
-  }
 }

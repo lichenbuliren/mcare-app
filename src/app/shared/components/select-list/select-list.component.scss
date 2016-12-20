@@ -1,0 +1,29 @@
+@charset 'UTF-8';
+@import "../../../../assets/global/_function";
+@import "../../../../assets/global/_mixin";
+
+.service-list {
+  @include font-dpr(16px);
+
+  .list-item {
+    position: relative;
+    padding: px2rem(36);
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+
+    &.checked::after {
+      position: absolute;
+      content: '';
+      right: px2rem(36);
+      top: 50%;
+      transform: translateY(-50%);
+      background: url('/assets/global/images/icon-selected.png') center no-repeat;
+      background-size: px2rem(72);
+      width: px2rem(72);
+      height: px2rem(72);
+    }
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}

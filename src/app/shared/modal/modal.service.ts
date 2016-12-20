@@ -1,44 +1,38 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ComponentRef, ComponentFactoryResolver, Component, ViewContainerRef } from '@angular/core';
+import { Observable, ReplaySubject } from 'rxjs';
 
 import { ModalComponent } from './modal.component';
 
 @Injectable()
 export class ModalService {
 
-  private modals: Array<ModalComponent>;
+  // 弹层实例对象
+  private modal: ModalComponent;
+  private componentRef: ComponentRef<Component>;
+  private viewContainerRef: ViewContainerRef;
 
-  constructor() {
-    this.modals = [];
-  }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   registerModal(newModal: ModalComponent): void {
-    var modal = this.findModal(newModal.modalId);
-    if (modal) {
-      // 删除旧的
-      this.modals.splice(this.modals.indexOf(modal));
+    this.modal = newModal;
+  }
+
+  // create<T>(module: any, component: any, params?: Object): Observable<ComponentRef<T>> {
+  //   let componentRef$ = new ReplaySubject();
+  // }
+
+  open(component, opt?: Object): ModalComponent {
+    if (this.componentRef) {
+      this.componentRef.destroy();
     }
-    this.modals.push(newModal);
+    // 动态加载其它组件
+    let factory = this.componentFactoryResolver.resolveComponentFactory(component);
+    this.componentRef = this.modal.dynamicTarget.createComponent(factory);
+    this.modal.isOpened = true;
+    return this.modal;
   }
 
-  open(modalId: string): void {
-    var modal = this.findModal(modalId);
-    if (!modal) return;
-    modal.isOpened = true;
-  }
-
-  close(modalId: string): void {
-    var modal = this.findModal(modalId);
-    if (!modal) return;
-    modal.isOpened = false;
-  }
-
-  private findModal(modalId: string): ModalComponent {
-    for(var modal of this.modals) {
-      if (modal.modalId === modalId) {
-        return modal;
-      }
-    }
-
-    return null;
+  close(): void {
+    this.modal.isOpened = false;
   }
 }

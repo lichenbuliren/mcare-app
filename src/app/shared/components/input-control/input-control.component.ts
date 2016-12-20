@@ -9,8 +9,8 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 
 // 要实现双向数据绑定，这个不可少
 export const INPUT_CONTROL_VALUE_ACCESSOR: any = {

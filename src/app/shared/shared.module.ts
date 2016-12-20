@@ -38,7 +38,7 @@ import { SelectListComponent } from './components/select-list/select-list.compon
     SelectListComponent
   ],
   providers: [ModalService],
-  entryComponents: [InputControlComponent]
+  entryComponents: [SelectListComponent]
 })
 export class SharedModule {
 }

@@ -8,7 +8,9 @@ import {
   HostListener,
   ElementRef,
   ViewChild,
+  Injector,
   ViewContainerRef,
+  TemplateRef,
   ComponentFactoryResolver,
   AfterViewInit,
   EventEmitter,
@@ -57,31 +59,28 @@ export class ModalComponent implements OnInit, AfterViewInit {
   // 公共属性
   // =======================
 
-  @ViewChild('modalRoot') public modalRoot: ElementRef;
+  @ViewChild('modalRoot') modalRoot: ElementRef;
 
   // =======================
   // 私有属性
   // =======================
-  componentRef: ComponentRef<Component>
 
   @ViewChild('modalBody', {read: ViewContainerRef}) dynamicTarget: ViewContainerRef;
 
   constructor(
     private modalService: ModalService,
+    private injector: Injector,
     private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.modalService.registerModal(this);
-    console.log('modalComonent modalId:', this.modalId);
   }
 
   ngOnDestroy() {
   }
 
   ngAfterViewInit() {
-    // let factory = this.componentFactoryResolver.resolveComponentFactory();
-    // this.componentRef = this.dynamicTarget.createComponent(factory);
   }
 
   cancel() {
@@ -90,7 +89,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
   }
 
   private close(...args: any[]) {
-    this.modalService.close(this.modalId);
+    this.modalService.close();
   }
 
   confirm() {

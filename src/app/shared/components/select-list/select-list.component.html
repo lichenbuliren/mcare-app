@@ -1,5 +1,8 @@
-<div class="row-control service-list">
-  <div *ngFor="let item of mockData" class="label-control" >
+<ul class="service-list">
+  <li *ngFor="let item of mockData"
+    class="list-item"
+    [class.checked]="item.isActive"
+    (click)="checked($event, item)">
     <label class="label">{{item.label}}</label>
-  </div>
-</div>
+  </li>
+</ul>

@@ -1,20 +1,18 @@
 <!-- 弹层 S -->
-<div *ngIf="isOpened">
-  <div class="modal-mask"></div>
-  <div class="modal" role="popup-dialog" #modalRoot>
-    <div [class]="'modal-dialog ' + clazz" #modalDialog (click)="preventClosing($event)">
-      <div class="modal-content" tabindex="0">
-        <div class="modal-header">
-          <ng-content select="[modal-header]"></ng-content>
-        </div>
-        <div class="modal-body">
-          <ng-content select="[modal-content]"></ng-content>
-        </div>
-        <div class="modal-footer">
-          <button *ngIf="cancelButtonLabel.length > 0" (click)="cancel()" class="button cancel" #cancelButton [class.full-fill]="
-        !confirmButtonLabel">{{cancelButtonLabel}}</button>
-          <button *ngIf="confirmButtonLabel.length > 0" (click)="confirm()" class="button primary" #confirmButton [class.full-fill]="!cancelButtonLabel">{{confirmButtonLabel}}</button>
-        </div>
+<div class="modal-mask" [ngStyle]="{display: isOpened ? 'block': 'none'}"></div>
+<div class="modal" role="popup-dialog" #modalRoot [ngStyle]="{display: isOpened ? 'block': 'none'}">
+  <div [class]="'modal-dialog ' + clazz" #modalDialog (click)="preventClosing($event)">
+    <div class="modal-content" tabindex="0">
+      <div class="modal-header">
+        <ng-content select="[modal-header]"></ng-content>
+      </div>
+      <div class="modal-body">
+        <span #modalBody></span>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="cancelButtonLabel.length > 0" (click)="cancel()" class="button cancel" #cancelButton [class.full-fill]="
+      !confirmButtonLabel">{{cancelButtonLabel}}</button>
+        <button *ngIf="confirmButtonLabel.length > 0" (click)="confirm()" class="button primary" #confirmButton [class.full-fill]="!cancelButtonLabel">{{confirmButtonLabel}}</button>
       </div>
     </div>
   </div>
