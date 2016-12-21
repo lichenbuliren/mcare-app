@@ -1,0 +1,51 @@
+$baseColor: rgba(0, 0, 0, .5);
+$greenColor: #18BD91;
+
+.bubble {
+  position:relative;
+  width: 100px;
+  margin: 20px auto;
+  text-align: center;
+  border: 1px solid $baseColor;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 10px;
+
+  &::after,
+  &::before {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border:8px solid $baseColor;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+  }
+
+  &::after {
+    border-width: 7px;
+    border-color: #fff;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+  }
+
+  &.left-top::after,
+  &.left-top::before {
+    left: 0;
+    top: 10px;
+    transform: translateX(-100%);
+  }
+
+  &.left-top::after {
+    top: 11px;
+  }
+
+  &.bubble-green {
+    border-color: $greenColor;
+
+    &::before {
+      border-top-color: $greenColor;
+      border-right-color: $greenColor;
+    }
+  }
+}

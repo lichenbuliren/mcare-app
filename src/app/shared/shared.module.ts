@@ -9,6 +9,7 @@ import { VerifyFormComponent } from './components/verify-form/verify-form.compon
 import { ModalComponent, ModalService } from './modal/';
 import { SelectControlComponent } from './components/select-control/select-control.component';
 import { SelectListComponent } from './components/select-list/select-list.component';
+import { BubbleComponent } from './bubble/bubble.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { SelectListComponent } from './components/select-list/select-list.compon
     VerifyFormComponent,
     ModalComponent,
     SelectControlComponent,
-    SelectListComponent
+    SelectListComponent,
+    BubbleComponent
   ],
   exports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { SelectListComponent } from './components/select-list/select-list.compon
     VerifyFormComponent,
     ModalComponent,
     SelectControlComponent,
-    SelectListComponent
+    SelectListComponent,
+    BubbleComponent
   ],
   providers: [ModalService],
   entryComponents: [SelectListComponent]
