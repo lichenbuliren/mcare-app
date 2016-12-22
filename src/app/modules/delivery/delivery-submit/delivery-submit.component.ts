@@ -56,13 +56,12 @@ export class DeliverySubmitComponent implements OnInit {
         console.log('service type click');
         // TODO 动态加载服务类型组件
         this.modalService.open<SelectListComponent>(SharedModule, SelectListComponent, {
-          selected: {
-            label: '维修',
-            val: 1,
-            isActive: true
-          }
+          label: '维修'
         }).subscribe(componentRef => {
-          console.log(componentRef.instance.selected);
+          let instance = componentRef.instance;
+
+          if (!instance.selected) return;
+          this.serviceType.setValue(instance.selected.label || instance.label);
         });
         break;
       case 'faultType':

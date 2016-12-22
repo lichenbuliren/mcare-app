@@ -15,15 +15,21 @@ export class SelectListComponent implements OnInit {
   },{
     label: '换新',
     val: 2,
-    isActive: true
+    isActive: false
   }];
 
-  @Input() selected;
+  selected;
 
-  constructor() { }
+  // 默认显示类型
+  @Input() label;
+
+  constructor() {
+    console.log('constructor');
+  }
 
   ngOnInit() {
-    console.log(this.selected);
+    console.log('on init');
+    this.setCurrent();
   }
 
   checked(event, item) {
@@ -37,4 +43,11 @@ export class SelectListComponent implements OnInit {
     this.selected = item;
   }
 
+  setCurrent() {
+    this.mockData.forEach(item => {
+      if (item.label == this.label) {
+        this.selected = item;
+      }
+    });
+  }
 }

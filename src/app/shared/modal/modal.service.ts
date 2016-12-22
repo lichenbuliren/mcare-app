@@ -71,6 +71,9 @@ export class ModalService {
   }
 
   confirm() {
+    // 确认操作，发送一个数据流
+    console.log('modalService confirm');
     this.componentRef$.next(this.componentRef);
+    // this.componentRef$.complete();
   }
 }
