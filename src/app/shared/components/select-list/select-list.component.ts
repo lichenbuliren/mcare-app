@@ -18,9 +18,13 @@ export class SelectListComponent implements OnInit {
     isActive: true
   }];
 
+  @Input() selected;
+
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.selected);
+  }
 
   checked(event, item) {
     event.stopPropagation();
@@ -30,9 +34,7 @@ export class SelectListComponent implements OnInit {
     });
 
     item.isActive = true;
-
-    // 对外暴露出选中的对象
-
+    this.selected = item;
   }
 
 }

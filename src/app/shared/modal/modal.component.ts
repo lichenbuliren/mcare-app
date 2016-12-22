@@ -65,12 +65,11 @@ export class ModalComponent implements OnInit, AfterViewInit {
   // 私有属性
   // =======================
 
-  @ViewChild('modalBody', {read: ViewContainerRef}) dynamicTarget: ViewContainerRef;
+  @ViewChild('modalBody', {read: ViewContainerRef}) public dynamicTarget: ViewContainerRef;
 
   constructor(
-    private modalService: ModalService,
-    private injector: Injector,
-    private componentFactoryResolver: ComponentFactoryResolver) {
+    public injector: Injector,
+    private modalService: ModalService) {
   }
 
   ngOnInit(): void {
@@ -83,21 +82,19 @@ export class ModalComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
   }
 
+  private close() {
+    this.isOpened = false;
+    this.modalService.close();
+  }
+
   cancel() {
     this.onCancel.emit();
     this.close();
   }
 
-  private close(...args: any[]) {
-    this.modalService.close();
-  }
-
   confirm() {
-    this.onConfirm.emit({
-      province: '广东',
-      city: '深圳'
-    });
-
+    this.onConfirm.emit();
+    this.modalService.confirm();
     this.close();
   }
 
@@ -107,7 +104,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
   keyup(event: KeyboardEvent) {
     if (event.keyCode === 27 && this.closeOnEscape) {
-      this.close();
+      this.isOpened = false;
     }
   }
 
@@ -122,7 +119,7 @@ export class ModalComponent implements OnInit, AfterViewInit {
 
     // 找到最顶层，则表示已经不在宿主元素内部了，触发失去焦点 fn
     if (parent == document) {
-      this.close();
+      this.isOpened = false;
     }
   }
 }

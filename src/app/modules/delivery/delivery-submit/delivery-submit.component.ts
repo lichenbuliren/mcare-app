@@ -4,6 +4,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/fo
 import { ServiceSupportService } from '../../../core/service-support.service';
 import { ModalService, ModalComponent } from '../../../shared/modal/';
 import { SelectListComponent } from '../../../shared/components/select-list/select-list.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'delivery-device',
@@ -54,7 +55,15 @@ export class DeliverySubmitComponent implements OnInit {
         this.modalTitle = '请选择维修类型';
         console.log('service type click');
         // TODO 动态加载服务类型组件
-        this.modalService.open(SelectListComponent);
+        this.modalService.open<SelectListComponent>(SharedModule, SelectListComponent, {
+          selected: {
+            label: '维修',
+            val: 1,
+            isActive: true
+          }
+        }).subscribe(componentRef => {
+          console.log(componentRef.instance.selected);
+        });
         break;
       case 'faultType':
         // TODO 动态加载故障类型组件
