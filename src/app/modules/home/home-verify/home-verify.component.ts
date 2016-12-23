@@ -21,7 +21,6 @@ export class HomeVerifyComponent implements OnInit {
 
   onSubmit() {
     // this.router.navigate(['../submit'], { relativeTo: this.activateRoute});
-    this.modalService.open(this.modalId);
     console.log('home 提交表单');
   }
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf, } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -8,7 +8,7 @@ import { CountdownComponent } from './components/countdown/countdown.component';
 import { VerifyFormComponent } from './components/verify-form/verify-form.component';
 import { ModalComponent, ModalService } from './modal/';
 import { SelectControlComponent } from './components/select-control/select-control.component';
-import { SelectListComponent } from './components/select-list/select-list.component';
+import { SelectListComponent, SelectListService } from './select-list/';
 import { BubbleComponent } from './bubble/bubble.component';
 
 @NgModule({
@@ -40,8 +40,13 @@ import { BubbleComponent } from './bubble/bubble.component';
     SelectListComponent,
     BubbleComponent
   ],
-  providers: [ModalService],
+  providers: [ModalService, SelectListService],
   entryComponents: [SelectListComponent]
 })
 export class SharedModule {
+  constructor(@Optional() @SkipSelf() parentModule: SharedModule) {
+    if (parentModule) {
+      throw new Error('CoreModule is already loaded. Import it in the AppModule only');
+    }
+  }
 }

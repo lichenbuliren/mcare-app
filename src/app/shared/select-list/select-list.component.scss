@@ -1,6 +1,6 @@
 @charset 'UTF-8';
-@import "../../../../assets/global/_function";
-@import "../../../../assets/global/_mixin";
+@import "../../../assets/global/_function";
+@import "../../../assets/global/_mixin";
 
 .service-list {
   @include font-dpr(16px);

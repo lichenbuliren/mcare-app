@@ -1,7 +1,7 @@
 <ul class="service-list">
-  <li *ngFor="let item of mockData"
+  <li *ngFor="let item of listData"
     class="list-item"
-    [class.checked]="item.isActive"
+    [class.checked]="item.isSelected"
     (click)="checked($event, item)">
     <label class="label">{{item.label}}</label>
   </li>

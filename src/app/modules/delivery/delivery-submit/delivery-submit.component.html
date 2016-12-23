@@ -8,7 +8,7 @@
       </div>
       <div class="row-control">
         <select-control name="serviceType" label="服务类型" [result]="serviceType.value" (click)="_handleSelectClick($event, 'serviceType')"></select-control>
-        <select-control name="faultType" label="故障类型" [result]="faultType.value" (click)="_handleSelectClick('faultType')"></select-control>
+        <select-control name="faultType" label="故障类型" [result]="faultType.value" (click)="_handleSelectClick($event, 'faultType')"></select-control>
       </div>
       <div class="row-control">
         <div class="input-control is-take-control">

@@ -3,7 +3,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/fo
 
 import { ServiceSupportService } from '../../../core/service-support.service';
 import { ModalService, ModalComponent } from '../../../shared/modal/';
-import { SelectListComponent } from '../../../shared/components/select-list/select-list.component';
+import { SelectListComponent } from '../../../shared/select-list/';
 import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
@@ -22,6 +22,10 @@ export class DeliverySubmitComponent implements OnInit {
   localData: any;
   modalTitle: string;
   modalId: string;
+  serviceTypeObj = {
+    id: 1,
+    label: '维修'
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +35,6 @@ export class DeliverySubmitComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('this.modalId: ', this.modalId);
     if (localStorage.getItem('DeliveryDataKey')) {
       this.localData = JSON.parse(localStorage.getItem('DeliveryDataKey'));
     } else {
@@ -53,15 +56,14 @@ export class DeliverySubmitComponent implements OnInit {
     switch (type) {
       case 'serviceType':
         this.modalTitle = '请选择维修类型';
-        console.log('service type click');
         // TODO 动态加载服务类型组件
-        this.modalService.open<SelectListComponent>(SharedModule, SelectListComponent, {
-          label: '维修'
+        this.modalService.create<SelectListComponent>(SharedModule, SelectListComponent, {
+          default: this.serviceTypeObj
         }).subscribe(componentRef => {
           let instance = componentRef.instance;
-
           if (!instance.selected) return;
-          this.serviceType.setValue(instance.selected.label || instance.label);
+          this.serviceType.setValue(instance.selected.label);
+          this.serviceTypeObj = instance.selected;
         });
         break;
       case 'faultType':

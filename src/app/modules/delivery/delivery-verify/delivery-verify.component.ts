@@ -30,4 +30,8 @@ export class DeliveryVerifyComponent implements OnInit {
   ngOnInit() {
 
   }
+
+  onSubmit() {
+    this.router.navigate(['../submit'], { relativeTo: this.activateRoute});
+  }
 }

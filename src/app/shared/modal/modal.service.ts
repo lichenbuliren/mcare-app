@@ -34,46 +34,40 @@ export class ModalService {
    * params 参数
    */
   create<T>(module: any, component: any, params?: Object): Observable<ComponentRef<T>> {
+    if (this.componentRef) {
+      this.componentRef.destroy();
+    }
     // 动态创建和编译一个 Module/Component
     this.compiler.compileModuleAndAllComponentsAsync(module).then(factory => {
       let componentFactory = factory.componentFactories.filter(item => item.componentType === component)[0];
 
       const childInjector = ReflectiveInjector.resolveAndCreate([], this.modal.injector);
       this.componentRef = this.modal.dynamicTarget.createComponent(componentFactory, 0, childInjector);
-
       // 给动态生成的组件赋值
       Object.assign(this.componentRef.instance, params);
-
       this.componentRef$.next(this.componentRef);
-      // componentRef$.complete();
+      setTimeout(() => {
+        this.modal.isOpened = true;
+      }, 0);
     });
 
     return this.componentRef$;
   }
 
-  open<T>(module: any, component, opt?: Object): Observable<ComponentRef<T>> {
+  open() {
     if (this.componentRef) {
       this.componentRef.destroy();
     }
-    // // 动态加载其它组件
-    // let factory = this.componentFactoryResolver.resolveComponentFactory(component);
-    // this.componentRef = this.modal.dynamicTarget.createComponent(factory);
-
-    // // 设置属性
-    // Object.assign(this.componentRef.instance, opt);
     this.modal.isOpened = true;
-
-    return this.create<T>(module, component, opt);
+    return this.modal;
   }
 
   close() {
-
   }
 
   confirm() {
-    // 确认操作，发送一个数据流
-    console.log('modalService confirm');
-    this.componentRef$.next(this.componentRef);
-    // this.componentRef$.complete();
+    if (this.componentRef$) {
+      this.componentRef$.next(this.componentRef);
+    }
   }
 }
