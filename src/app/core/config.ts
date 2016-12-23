@@ -30,3 +30,10 @@ export class ApiConfig {
     sms: ''
   }
 }
+
+export class ConstConfig {
+  static RepairBaseInfoKey = 'repairBaseInfo';
+  static DeliveryRepairKey = 'deliveryRepair';
+  static OrderRepairKey = 'orderRepair';
+  static HomeRepairKey = 'homeRepair';
+}

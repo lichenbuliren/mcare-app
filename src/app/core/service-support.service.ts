@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { URLSearchParams, Jsonp, Response, Http } from '@angular/http';
 import { Observable } from 'rxjs';
 
-import { ApiConfig } from './api-config';
 import * as Hashes from 'jshashes';
 
 const smsConfig = {
@@ -16,7 +15,11 @@ const smsConfig = {
 @Injectable()
 export class ServiceSupportService {
 
-  constructor(private _jsonp: Jsonp, private http: Http) {}
+  constructor(
+    private _jsonp: Jsonp,
+    private http: Http,
+    @Inject('ApiConfig') private apiConfig: any) {
+  }
 
   // 设置公共请求参数
   generateSearchParam(query?: {jsonp: boolean}): URLSearchParams {
@@ -29,8 +32,8 @@ export class ServiceSupportService {
   // 定位当前省份城市
   getLoaction(): Observable<any> {
     let search = this.generateSearchParam({ jsonp: true });
-    search.set('ak', ApiConfig.baiduMap.ak);
-    return this._jsonp.get(ApiConfig.baiduMap.location, {search: search})
+    search.set('ak', this.apiConfig.baiduMap.ak);
+    return this._jsonp.get(this.apiConfig.baiduMap.location, {search: search})
     .map(res => res.json())
     .map(data => {
       let address = data.content.address_detail;
@@ -45,7 +48,7 @@ export class ServiceSupportService {
   sendSms(mobile): Observable<any> {
     let timestamp = +new Date();
     let sign = this.generateMsgSign(timestamp, mobile);
-    return this.http.post(ApiConfig.wan.sms, {
+    return this.http.post(this.apiConfig.wan.sms, {
       phone: mobile,
       sign: sign,
       client: smsConfig.client,
@@ -54,7 +57,7 @@ export class ServiceSupportService {
   }
 
   checkSms(opt): Observable<any> {
-    return this.http.post(ApiConfig.wan.checkSms, {
+    return this.http.post(this.apiConfig.wan.checkSms, {
       phone: opt.phone,
       code: opt.captcha
     }).map(res => res.json()).map(json => {

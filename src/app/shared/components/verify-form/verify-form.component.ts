@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, ViewEncapsulation, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, ViewEncapsulation, EventEmitter, Inject } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 import { ServiceSupportService } from '../../../core/service-support.service';
@@ -25,13 +25,14 @@ export class VerifyFormComponent implements OnInit {
   @Output() submit: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
+    @Inject('ConstConfig') private constConfig: any,
     private formBuilder: FormBuilder,
     private serviceSupport: ServiceSupportService) {
   }
 
   ngOnInit() {
-    if (localStorage.getItem('RepairBaseInfoKey')) {
-      this.localData = JSON.parse(localStorage.getItem('RepairBaseInfoKey'));
+    if (localStorage.getItem(this.constConfig.RepairBaseInfoKey)) {
+      this.localData = JSON.parse(localStorage.getItem(this.constConfig.RepairBaseInfoKey));
     } else {
       this.localData = {
         username: '张三',
@@ -61,7 +62,11 @@ export class VerifyFormComponent implements OnInit {
 
   onSubmit(event) {
     event.preventDefault();
-
+    window.localStorage.setItem(this.constConfig.RepairBaseInfoKey, JSON.stringify({
+      username: this.username.value,
+      mobile: this.mobile.value,
+      captcha: this.captcha.value
+    }));
     // 校验短信验证码
     this.serviceSupport.checkSms({
       phone: this.mobile.value,
@@ -69,7 +74,7 @@ export class VerifyFormComponent implements OnInit {
     }).subscribe(success => {
       if (success) {
         // 保存本地数据
-        window.localStorage.setItem('RepairBaseInfoKey', JSON.stringify({
+        window.localStorage.setItem(this.constConfig.RepairBaseInfoKey, JSON.stringify({
           username: this.username.value,
           mobile: this.mobile.value,
           captcha: this.captcha.value

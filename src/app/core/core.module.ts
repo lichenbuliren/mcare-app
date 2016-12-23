@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { HttpModule, JsonpModule } from '@angular/http';
 
 import { NavbarComponent } from './navbar/navbar.component';
-import { ApiConfig } from './api-config';
+import { ApiConfig, ConstConfig } from './config';
 import { ServiceSupportService } from './service-support.service';
 
 
@@ -16,7 +16,14 @@ import { ServiceSupportService } from './service-support.service';
   imports: [CommonModule],
   exports: [HttpModule, JsonpModule, NavbarComponent],
   declarations: [NavbarComponent],
-  providers: [ServiceSupportService],
+  // 这里注册全局的单例配置服务
+  providers: [ServiceSupportService, {
+    provide: 'ApiConfig',
+    useValue: ApiConfig
+  }, {
+    provide: 'ConstConfig',
+    useValue: ConstConfig
+  }],
 })
 export class CoreModule {
 
