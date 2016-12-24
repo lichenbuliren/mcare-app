@@ -12,6 +12,8 @@ import {
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 
+import { SelectControl } from './select-control';
+
 @Component({
   selector: 'select-control',
   templateUrl: './select-control.component.html',
@@ -23,14 +25,17 @@ import {Observable} from 'rxjs/Observable';
 })
 export class SelectControlComponent implements OnInit{
 
+  private _dataId: string;
+  private _dataValue: string;
   // ======= 输入属性 =======
   @Input() name: string;
   @Input() label: string;
-  @Input() result: string;
+  @Input() data: SelectControl;
 
   constructor() { }
 
   ngOnInit() {
+    if (!this.data) this.data = new SelectControl();
   }
 
 }

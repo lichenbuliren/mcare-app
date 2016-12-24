@@ -46,9 +46,7 @@ export class ModalService {
       // 给动态生成的组件赋值
       Object.assign(this.componentRef.instance, params);
       this.componentRef$.next(this.componentRef);
-      setTimeout(() => {
-        this.modal.isOpened = true;
-      }, 0);
+      this.modal.isOpened = true;
     });
 
     return this.componentRef$;
@@ -66,8 +64,7 @@ export class ModalService {
   }
 
   confirm() {
-    if (this.componentRef$) {
-      this.componentRef$.next(this.componentRef);
-    }
+    debugger;
+    this.componentRef$.next(this.componentRef);
   }
 }

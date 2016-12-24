@@ -9,11 +9,20 @@ import { SelectList } from './select-list';
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectListComponent implements OnInit {
+  private _multiple: boolean = false;
 
-  listData: Array<SelectList>;
-  selected: SelectList;
+  listData: Array<SelectList> = [];
+  selected: Array<SelectList> = [];
   // 默认显示类型
-  @Input() default: SelectList;
+  @Input() default: Array<SelectList> = [];
+
+  @Input()
+  get multiple() {
+    return this._multiple;
+  }
+  set multiple(value) {
+    this._multiple = this._coerceBooleanProperty(value);
+  }
 
   constructor(private selectListService: SelectListService) {
   }
@@ -37,10 +46,20 @@ export class SelectListComponent implements OnInit {
 
   setCurrent() {
     this.listData.forEach(item => {
-      if (item.id === this.default.id && item.label === this.default.label) {
-        item.isSelected = true;
-        this.selected = item;
-      }
+      this.default.forEach((selected) => {
+        this.setSelected(item, selected);
+      });
     });
+  }
+
+  private setSelected(item: SelectList, defaultItem: SelectList) {
+    if (item.id === defaultItem.id || item.label === defaultItem.label) {
+      item.isSelected = true;
+      this.selected.push(item);
+    }
+  }
+
+  private _coerceBooleanProperty(value: any): boolean {
+    return value != null && `${value}` !== 'false';
   }
 }

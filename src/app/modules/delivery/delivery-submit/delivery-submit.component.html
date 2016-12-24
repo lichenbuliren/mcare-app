@@ -7,8 +7,8 @@
         </input-control>
       </div>
       <div class="row-control">
-        <select-control name="serviceType" label="服务类型" [result]="serviceType.value" (click)="_handleSelectClick($event, 'serviceType')"></select-control>
-        <select-control name="faultType" label="故障类型" [result]="faultType.value" (click)="_handleSelectClick($event, 'faultType')"></select-control>
+        <select-control name="serviceType" label="服务类型" [data]="serviceType.value" (click)="_handleSelectClick($event, 'serviceType')"></select-control>
+        <!--<select-control name="faultType" label="故障类型" [data]="faultType.value" (click)="_handleSelectClick($event, 'faultType')"></select-control>-->
       </div>
       <div class="row-control">
         <div class="input-control is-take-control">
@@ -19,8 +19,8 @@
         <p class="remark">保内服务免运费，保外服务每单运费40元</p>
       </div>
       <div class="row-control">
-        <select-control name="send-address" label="用户所在地" [result]="" (click)="_handleSelectClick('send-address')"></select-control>
-        <select-control name="rec-address" label="回寄地址" [result]="" (click)="_handleSelectClick('rec-address')"></select-control>
+        <!--<select-control name="send-address" label="用户所在地" [data]="" (click)="_handleSelectClick('send-address')"></select-control>
+        <select-control name="rec-address" label="回寄地址" [data]="" (click)="_handleSelectClick('rec-address')"></select-control>-->
         <div class="select-control protocol">
           <i class="icon icon-radio"></i>
           <div class="label">我已阅读以下并同意对寄修可能产生的费用进行支付。<br><a href="http://mcare.meizu.com/policy.html">《魅族手机售后服务政策》</a>及<a href="http://mcare.meizu.com/price-list.html">《保外服务报价清单》</a>

@@ -27,11 +27,18 @@ export class DeliverySubmitComponent implements OnInit {
     label: '维修'
   }
 
+  faultTypeArr = [{
+    id: 1,
+    label: '进水'
+  }, {
+    id: 2,
+    label: '无声音'
+  }];
+
   constructor(
     private formBuilder: FormBuilder,
     private serviceSupport: ServiceSupportService,
     private modalService: ModalService) {
-    this.modalId = +new Date() + '';
   }
 
   ngOnInit() {
@@ -42,8 +49,8 @@ export class DeliverySubmitComponent implements OnInit {
     }
     this.deliveryFormGroup = this.formBuilder.group({
       'sn': [this.localData.sn, Validators.required],
-      'serviceType': ['维修', Validators.required],
-      'faultType': ['进水', Validators.required]
+      'serviceType': [this.serviceTypeObj, Validators.required],
+      'faultType': [this.faultTypeArr, Validators.required]
     });
 
     this.sn = this.deliveryFormGroup.controls['sn'];
@@ -58,12 +65,13 @@ export class DeliverySubmitComponent implements OnInit {
         this.modalTitle = '请选择维修类型';
         // TODO 动态加载服务类型组件
         this.modalService.create<SelectListComponent>(SharedModule, SelectListComponent, {
-          default: this.serviceTypeObj
+          default: [this.serviceTypeObj]
         }).subscribe(componentRef => {
           let instance = componentRef.instance;
-          if (!instance.selected) return;
-          this.serviceType.setValue(instance.selected.label);
-          this.serviceTypeObj = instance.selected;
+          console.log(instance);
+          if (!instance.selected.length) return;
+          this.serviceType.setValue(instance.selected[0]);
+          this.serviceTypeObj = instance.selected[0];
         });
         break;
       case 'faultType':
