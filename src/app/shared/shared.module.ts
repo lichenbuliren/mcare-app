@@ -7,7 +7,7 @@ import { InputControlComponent } from './components/input-control/input-control.
 import { CountdownComponent } from './components/countdown/countdown.component';
 import { VerifyFormComponent } from './components/verify-form/verify-form.component';
 import { ModalComponent, ModalService } from './modal/';
-import { SelectControlComponent } from './components/select-control/select-control.component';
+import { SelectControlComponent } from './select-control/select-control.component';
 import { SelectListComponent, SelectListService } from './select-list/';
 import { BubbleComponent } from './bubble/bubble.component';
 
@@ -44,7 +44,7 @@ import { BubbleComponent } from './bubble/bubble.component';
   entryComponents: [SelectListComponent]
 })
 export class SharedModule {
-  constructor(@Optional() @SkipSelf() parentModule: SharedModule) {
+  constructor( @Optional() @SkipSelf() parentModule: SharedModule) {
     if (parentModule) {
       throw new Error('CoreModule is already loaded. Import it in the AppModule only');
     }

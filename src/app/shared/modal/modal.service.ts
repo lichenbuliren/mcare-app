@@ -64,7 +64,6 @@ export class ModalService {
   }
 
   confirm() {
-    debugger;
     this.componentRef$.next(this.componentRef);
   }
 }

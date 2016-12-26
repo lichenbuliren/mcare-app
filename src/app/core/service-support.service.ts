@@ -15,6 +15,13 @@ const smsConfig = {
 @Injectable()
 export class ServiceSupportService {
 
+  // 服务类型选项列表
+  serviceTypeList: Array<any>;
+  // 故障类型列表
+  faultTypeList: Array<any>;
+  // 级联地址库数据
+  addressLib: Object;
+
   constructor(
     private _jsonp: Jsonp,
     private http: Http,
@@ -22,7 +29,7 @@ export class ServiceSupportService {
   }
 
   // 设置公共请求参数
-  generateSearchParam(query?: {jsonp: boolean}): URLSearchParams {
+  generateSearchParam(query?: { jsonp: boolean }): URLSearchParams {
     let search = new URLSearchParams();
     // 统一 jsonp 请求参数
     if (query.jsonp) search.set('callback', 'JSONP_CALLBACK');
@@ -33,15 +40,15 @@ export class ServiceSupportService {
   getLoaction(): Observable<any> {
     let search = this.generateSearchParam({ jsonp: true });
     search.set('ak', this.apiConfig.baiduMap.ak);
-    return this._jsonp.get(this.apiConfig.baiduMap.location, {search: search})
-    .map(res => res.json())
-    .map(data => {
-      let address = data.content.address_detail;
-      return {
-        province: address.province,
-        city: address.city
-      }
-    }).catch((error) => Observable.throw(error.json().error || 'Server error'));
+    return this._jsonp.get(this.apiConfig.baiduMap.location, { search: search })
+      .map(res => res.json())
+      .map(data => {
+        let address = data.content.address_detail;
+        return {
+          province: address.province,
+          city: address.city
+        }
+      }).catch((error) => Observable.throw(error.json().error || 'Server error'));
   }
 
   // 获取短信验证码

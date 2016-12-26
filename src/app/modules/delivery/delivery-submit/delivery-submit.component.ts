@@ -68,7 +68,6 @@ export class DeliverySubmitComponent implements OnInit {
           default: [this.serviceTypeObj]
         }).subscribe(componentRef => {
           let instance = componentRef.instance;
-          console.log(instance);
           if (!instance.selected.length) return;
           this.serviceType.setValue(instance.selected[0]);
           this.serviceTypeObj = instance.selected[0];

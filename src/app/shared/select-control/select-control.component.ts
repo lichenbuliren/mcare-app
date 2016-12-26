@@ -9,8 +9,8 @@ import {
   forwardRef,
 } from '@angular/core';
 
-import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 
 import { SelectControl } from './select-control';
 
@@ -23,7 +23,7 @@ import { SelectControl } from './select-control';
     'class': 'select-control'
   }
 })
-export class SelectControlComponent implements OnInit{
+export class SelectControlComponent implements OnInit {
 
   private _dataId: string;
   private _dataValue: string;
