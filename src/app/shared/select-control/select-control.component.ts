@@ -24,9 +24,6 @@ import { SelectControl } from './select-control';
   }
 })
 export class SelectControlComponent implements OnInit {
-
-  private _dataId: string;
-  private _dataValue: string;
   // ======= 输入属性 =======
   @Input() name: string;
   @Input() label: string;

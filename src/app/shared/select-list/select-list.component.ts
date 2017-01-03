@@ -1,18 +1,19 @@
-import { Component, OnInit, ViewEncapsulation, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { SelectListService } from './select-list.service';
 import { SelectList } from './select-list';
 
 @Component({
   selector: 'select-list',
-  styleUrls: ['select-list.component.scss'],
-  templateUrl: 'select-list.component.html',
+  styleUrls: ['./select-list.component.scss'],
+  templateUrl: './select-list.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class SelectListComponent implements OnInit, AfterViewInit {
+export class SelectListComponent implements OnInit {
   private _multiple: boolean = false;
-
-  listData: Array<SelectList> = [];
   selected: Array<SelectList> = [];
+
+  @Input() remark: string;
+  @Input() listData: Array<SelectList> = [];
   // 默认显示类型
   @Input() default: Array<SelectList> = [];
 
@@ -28,16 +29,7 @@ export class SelectListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.selectListService.getListData().subscribe(data => {
-      this.listData = data;
-      this.setCurrent();
-    });
-
-    console.log('mutiple ? ', this._multiple);
-  }
-
-  ngAfterViewInit() {
-    // console.log('mutiple ? ', this._multiple);
+    this.setCurrent();
   }
 
   // 点击事件

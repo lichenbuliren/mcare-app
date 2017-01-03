@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { URLSearchParams, Jsonp, Response, Http } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable, Observer, ReplaySubject } from 'rxjs';
 
 import * as Hashes from 'jshashes';
 
@@ -14,11 +14,6 @@ const smsConfig = {
  */
 @Injectable()
 export class ServiceSupportService {
-
-  // 服务类型选项列表
-  serviceTypeList: Array<any>;
-  // 故障类型列表
-  faultTypeList: Array<any>;
   // 级联地址库数据
   addressLib: Object;
 

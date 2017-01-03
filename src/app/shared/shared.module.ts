@@ -10,6 +10,8 @@ import { ModalComponent, ModalService } from './modal/';
 import { SelectControlComponent } from './select-control/select-control.component';
 import { SelectListComponent, SelectListService } from './select-list/';
 import { BubbleComponent } from './bubble/bubble.component';
+import { CascadeListComponent } from './cascade-list/cascade-list.component';
+import { ObjectToArrayPipe } from './object-to-array.pipe';
 
 @NgModule({
   imports: [
@@ -25,7 +27,9 @@ import { BubbleComponent } from './bubble/bubble.component';
     ModalComponent,
     SelectControlComponent,
     SelectListComponent,
-    BubbleComponent
+    BubbleComponent,
+    CascadeListComponent,
+    ObjectToArrayPipe
   ],
   exports: [
     CommonModule,
@@ -41,7 +45,7 @@ import { BubbleComponent } from './bubble/bubble.component';
     BubbleComponent
   ],
   providers: [ModalService, SelectListService],
-  entryComponents: [SelectListComponent]
+  entryComponents: [SelectListComponent, CascadeListComponent]
 })
 export class SharedModule {
   constructor( @Optional() @SkipSelf() parentModule: SharedModule) {

@@ -1,8 +1,8 @@
 <ul class="service-list">
-  <li *ngFor="let item of listData"
-    class="list-item"
-    [class.checked]="item.isSelected"
-    (click)="checked($event, item)">
+  <li *ngFor="let item of listData" class="list-item" [class.checked]="item.isSelected" (click)="checked($event, item)">
     <label class="label">{{item.label}}</label>
+  </li>
+  <li *ngIf="multiple" class="list-item item-remark">
+    <input type="text" name="remark" [(ngModel)]="remark" placeholder="输入其它原因">
   </li>
 </ul>

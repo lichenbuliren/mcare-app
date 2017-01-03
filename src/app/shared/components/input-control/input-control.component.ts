@@ -24,8 +24,8 @@ const noop = () => {
 
 @Component({
   selector: 'input-control',
-  templateUrl: 'input-control.component.html',
-  styleUrls: ['input-control.component.scss'],
+  templateUrl: './input-control.component.html',
+  styleUrls: ['./input-control.component.scss'],
   host: {
     // 宿主元素 click 事件，触发 focus() 事件
     '(click)': 'focus()',

@@ -1,0 +1,7 @@
+<div class="cascade-wrapper">
+  <ul class="cascade-list" *ngFor="let list of currentData">
+    <li class="cascade-lite-item" *ngFor="let key of (list | objectToArray)">
+      {{list[key].name}}
+    </li>
+  </ul>
+</div>

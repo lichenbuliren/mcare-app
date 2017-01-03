@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Inject, AfterViewInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 import { ServiceSupportService } from '../../../core/service-support.service';
 import { ModalService, ModalComponent } from '../../../shared/modal/';
 import { SelectListComponent } from '../../../shared/select-list/';
-import { SharedModule } from '../../../shared/shared.module';
+import { CascadeListComponent } from '../../../shared/cascade-list/cascade-list.component';
 
 @Component({
   selector: 'delivery-device',
-  templateUrl: 'delivery-submit.component.html',
-  styleUrls: ['delivery-submit.component.scss'],
+  templateUrl: './delivery-submit.component.html',
+  styleUrls: ['./delivery-submit.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class DeliverySubmitComponent implements OnInit {
@@ -21,23 +21,15 @@ export class DeliverySubmitComponent implements OnInit {
 
   localData: any;
   modalTitle: string;
-  modalId: string;
-  serviceTypeObj = {
-    id: 1,
-    label: '维修'
-  }
-
-  faultTypeArr = [{
-    id: 1,
-    label: '进水'
-  }, {
-    id: 2,
-    label: '无声音'
-  }];
+  serviceTypeObj: any;
+  faultTypeObj: any;
+  faultRemark: string;
+  areaData: any;
 
   constructor(
+    @Inject('ConstConfig') private constConfig: any,
     private formBuilder: FormBuilder,
-    private serviceSupport: ServiceSupportService,
+    private serviceSupportService: ServiceSupportService,
     private modalService: ModalService) {
   }
 
@@ -47,10 +39,12 @@ export class DeliverySubmitComponent implements OnInit {
     } else {
       this.localData = {};
     }
+    this.serviceTypeObj = this.constConfig.serviceType[0];
+    this.faultTypeObj = this.constConfig.faultList[0];
     this.deliveryFormGroup = this.formBuilder.group({
       'sn': [this.localData.sn, Validators.required],
       'serviceType': [this.serviceTypeObj, Validators.required],
-      'faultType': [this.faultTypeArr, Validators.required]
+      'faultType': [this.faultTypeObj, Validators.required]
     });
 
     this.sn = this.deliveryFormGroup.controls['sn'];
@@ -63,9 +57,9 @@ export class DeliverySubmitComponent implements OnInit {
     switch (type) {
       case 'serviceType':
         this.modalTitle = '请选择维修类型';
-        // TODO 动态加载服务类型组件
-        this.modalService.create<SelectListComponent>(SharedModule, SelectListComponent, {
-          default: [this.serviceTypeObj]
+        this.modalService.open<SelectListComponent>(SelectListComponent, {
+          default: [this.serviceTypeObj],
+          listData: this.constConfig.serviceType
         }).subscribe(componentRef => {
           let instance = componentRef.instance;
           if (!instance.selected.length) return;
@@ -74,7 +68,33 @@ export class DeliverySubmitComponent implements OnInit {
         });
         break;
       case 'faultType':
-        // TODO 动态加载故障类型组件
+        this.modalTitle = '请选择故障类型';
+        this.modalService.open<SelectListComponent>(SelectListComponent, {
+          default: [this.faultTypeObj],
+          listData: this.constConfig.faultList,
+          multiple: true,
+          remark: this.faultRemark
+        }).subscribe(componentRef => {
+          let instance = componentRef.instance;
+          let faultsText = [];
+          let faultsIds = [];
+          if (!instance.selected.length) return;
+
+          instance.selected.forEach((item) => {
+            faultsIds.push(item.id);
+            faultsText.push(item.label);
+          });
+
+          faultsText.push(instance.remark);
+          this.faultRemark = instance.remark;
+
+          this.faultTypeObj = {
+            id: faultsIds.join(','),
+            label: faultsText.join(',')
+          }
+
+          this.faultType.setValue(this.faultTypeObj);
+        });
         break;
       case 'send-address':
       // TODO 动态加载地址组件
